@@ -11,12 +11,13 @@ import {
   Flame, 
   Sun, 
   Moon,
-  RotateCcw
+  RotateCcw,
+  Laptop
 } from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: 'vault' | 'terminal' | 'builder' | 'quiz' | 'releases';
-  setActiveTab: (tab: 'vault' | 'terminal' | 'builder' | 'quiz' | 'releases') => void;
+  activeTab: 'vault' | 'terminal' | 'builder' | 'quiz' | 'releases' | 'setup';
+  setActiveTab: (tab: 'vault' | 'terminal' | 'builder' | 'quiz' | 'releases' | 'setup') => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   bookmarkCount: number;
@@ -94,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-cyan-500 font-mono"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-cyan-500 font-mono cursor-pointer"
                 >
                   CLEAR
                 </button>
@@ -102,15 +103,15 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Right Action Buttons & Theme Switcher */}
-          <div className="flex items-center space-x-1.5 sm:space-x-2">
+          {/* Quick Actions (Replay, Bookmarks, Export, Theme Toggle) */}
+          <div className="flex items-center space-x-2 sm:space-x-2.5">
             
-            {/* Replay Splash Intro Button */}
+            {/* Replay 3D Splash Button */}
             {onReplaySplash && (
               <button
                 onClick={onReplaySplash}
                 title="Replay 3D Clay Kali Intro"
-                className="clay-btn p-2 text-slate-500 dark:text-slate-400 hover:text-cyan-500 transition-colors hidden sm:flex items-center"
+                className="clay-btn p-2 text-slate-500 dark:text-slate-400 hover:text-cyan-500 transition-colors hidden sm:flex items-center cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
@@ -123,7 +124,7 @@ export const Header: React.FC<HeaderProps> = ({
                 if (activeTab !== 'vault') setActiveTab('vault');
               }}
               title="Toggle Bookmarked Commands"
-              className={`clay-btn flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`clay-btn flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${
                 showOnlyBookmarks
                   ? 'text-amber-500 font-bold shadow-inner'
                   : 'text-slate-600 dark:text-slate-300'
@@ -131,7 +132,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Bookmark className={`w-3.5 h-3.5 ${showOnlyBookmarks ? 'fill-amber-400 text-amber-500' : ''}`} />
               <span className="hidden sm:inline">Saved</span>
-              <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold">
                 {bookmarkCount}
               </span>
             </button>
@@ -140,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenExport}
               title="Export Cheat Sheet"
-              className="clay-btn flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-200"
+              className="clay-btn flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-200 cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-cyan-500" />
               <span className="hidden sm:inline">Export</span>
@@ -181,7 +182,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Command Vault Tab */}
           <button
             onClick={() => setActiveTab('vault')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               activeTab === 'vault'
                 ? 'clay-btn text-cyan-600 dark:text-cyan-300 font-bold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
@@ -189,15 +190,31 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <Shield className="w-4 h-4 text-cyan-500" />
             <span>Command Vault</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold">
               {totalCommandsCount}
+            </span>
+          </button>
+
+          {/* Kali Setup Guide Tab (Shortcut Nav Key for Win & Mac) */}
+          <button
+            onClick={() => setActiveTab('setup')}
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+              activeTab === 'setup'
+                ? 'clay-btn text-cyan-600 dark:text-cyan-300 font-bold shadow-md shadow-cyan-500/15'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+            }`}
+          >
+            <Laptop className="w-4 h-4 text-cyan-500" />
+            <span>Setup Guide</span>
+            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+              WIN + MAC
             </span>
           </button>
 
           {/* Kali Terminal Tab */}
           <button
             onClick={() => setActiveTab('terminal')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               activeTab === 'terminal'
                 ? 'clay-btn text-emerald-600 dark:text-emerald-300 font-bold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
@@ -214,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Command Builder Tab */}
           <button
             onClick={() => setActiveTab('builder')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               activeTab === 'builder'
                 ? 'clay-btn text-purple-600 dark:text-purple-300 font-bold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
@@ -230,7 +247,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Cyber Quiz Tab */}
           <button
             onClick={() => setActiveTab('quiz')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               activeTab === 'quiz'
                 ? 'clay-btn text-amber-600 dark:text-amber-300 font-bold'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
@@ -244,7 +261,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Latest Tools & Releases Tab (Highlighted with Flame) */}
           <button
             onClick={() => setActiveTab('releases')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               activeTab === 'releases'
                 ? 'clay-btn text-rose-600 dark:text-rose-300 font-bold shadow-md shadow-rose-500/10'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'

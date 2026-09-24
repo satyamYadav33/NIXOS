@@ -6,13 +6,14 @@ import { TerminalSimulator } from './components/TerminalSimulator';
 import { CommandBuilder } from './components/CommandBuilder';
 import { CyberQuiz } from './components/CyberQuiz';
 import { LatestReleases } from './components/LatestReleases';
+import { KaliSetupGuide } from './components/KaliSetupGuide';
 import { ExportModal } from './components/ExportModal';
 import { ClayKaliSplash } from './components/ClayKaliSplash';
 import { ThemeTransitionWave } from './components/ThemeTransitionWave';
-import { ShieldAlert, Terminal, ExternalLink, Flame } from 'lucide-react';
+import { ShieldAlert, Terminal, ExternalLink, Flame, Laptop } from 'lucide-react';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<'vault' | 'terminal' | 'builder' | 'quiz' | 'releases'>('vault');
+  const [activeTab, setActiveTab] = useState<'vault' | 'terminal' | 'builder' | 'quiz' | 'releases' | 'setup'>('vault');
   const [searchQuery, setSearchQuery] = useState('');
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
   const [isExportOpen, setIsExportOpen] = useState(false);
@@ -151,7 +152,7 @@ export function App() {
             <div>
               <h2 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 font-mono flex items-center gap-2">
                 <span>Offensive Security & Red Team Tactical Playbook</span>
-                <span className="clay-badge text-[9px] px-2 py-0.5 text-cyan-600 dark:text-cyan-400 uppercase">
+                <span className="clay-badge text-[9px] px-2 py-0.5 text-cyan-600 dark:text-cyan-400 uppercase font-mono">
                   v2024.x
                 </span>
               </h2>
@@ -161,15 +162,26 @@ export function App() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono self-end sm:self-center">
+          <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono self-end sm:self-center">
+            {/* Quick Link to Setup Guide */}
+            <button
+              onClick={() => setActiveTab('setup')}
+              className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-cyan-600 dark:text-cyan-400 font-bold cursor-pointer"
+            >
+              <Laptop className="w-3.5 h-3.5 text-cyan-500" />
+              <span>Win/Mac Setup</span>
+            </button>
+
+            {/* Quick Link to Releases */}
             <button
               onClick={() => setActiveTab('releases')}
               className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-rose-600 dark:text-rose-400 font-bold cursor-pointer"
             >
               <Flame className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
-              <span>Latest Tools Radar</span>
+              <span>Latest Tools</span>
               <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
             </button>
+
             <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">|</span>
             <span className="clay-badge px-3 py-1 text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -193,6 +205,13 @@ export function App() {
             setSearchQuery={setSearchQuery}
             showOnlyBookmarks={showOnlyBookmarks}
             setShowOnlyBookmarks={setShowOnlyBookmarks}
+          />
+        )}
+
+        {activeTab === 'setup' && (
+          <KaliSetupGuide
+            onRunInTerminal={handleRunInTerminal}
+            onExploreCommands={() => setActiveTab('vault')}
           />
         )}
 

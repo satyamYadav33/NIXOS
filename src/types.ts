@@ -24,6 +24,8 @@ export type KillChainPhase =
   | 'Collection'
   | 'Forensics';
 
+export type LearningLevel = 'Beginner' | 'Intermediate' | 'Advanced';
+
 export interface CommandFlag {
   flag: string;
   description: string;
@@ -41,6 +43,10 @@ export interface CommandItem {
   scenario: string;
   noiseLevel: NoiseLevel;
   phase: KillChainPhase;
+  learningLevel?: LearningLevel;
+  mentalModel?: string; // Plain-English beginner breakdown of what happens under the hood
+  beginnerPitfall?: string; // Common beginner mistake to avoid
+  factCheckNotes?: string; // Authoritative technical verification notes
   mitreId?: string;
   outputExample?: string;
   tips?: string;
@@ -95,3 +101,29 @@ export interface LatestTool {
   badgeText?: string;
 }
 
+// Setup Guide Types
+export type OSPlatform = 'windows' | 'mac';
+export type SetupMethod = 'wsl' | 'vm' | 'usb' | 'utm' | 'fusion' | 'intel_vm';
+
+export interface SetupStep {
+  id: string;
+  stepNumber: number;
+  title: string;
+  estimatedTime: string;
+  summary: string;
+  instructions: string[];
+  commandToRun?: string;
+  outputPreview?: string;
+  warningNote?: string;
+  proTip?: string;
+}
+
+export interface TroubleshootingItem {
+  id: string;
+  issue: string;
+  platform: 'windows' | 'mac' | 'both';
+  symptom: string;
+  rootCause: string;
+  solutionSteps: string[];
+  fixCommand?: string;
+}

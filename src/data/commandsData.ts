@@ -110,6 +110,10 @@ export const COMMANDS_DATA: CommandItem[] = [
     scenario: 'Used during passive reconnaissance to build an initial target profile, find staff emails for spear-phishing simulation, and uncover forgotten subdomains without touching target servers.',
     noiseLevel: 'stealth',
     phase: 'Reconnaissance',
+    learningLevel: 'Beginner',
+    mentalModel: 'Searches public databases, search engine indexes, and PGP key directories without sending a single probe to target.com servers. It acts like an automated Google search bot that filters out employee names and emails.',
+    beginnerPitfall: 'Forgetting to configure free API keys in api-keys.yaml (e.g. Shodan, GitHub, Hunter.io) will limit results to basic search engine scrapes. Some engines may temporarily CAPTCHA-block your IP.',
+    factCheckNotes: 'Native package in Kali Linux (theharvester). Syntax validated against Kali Rolling 2024.x.',
     mitreId: 'T1593 / T1589',
     outputExample: `[*] Target: target.com
 [*] Searching Bing...
@@ -138,6 +142,10 @@ export const COMMANDS_DATA: CommandItem[] = [
     scenario: 'Step 1 of an external penetration test to identify the registrar, administrative contacts, DNS name servers, and assigned CIDR IP blocks.',
     noiseLevel: 'stealth',
     phase: 'Reconnaissance',
+    learningLevel: 'Beginner',
+    mentalModel: 'Queries public ICANN and RIR databases to discover who legally registered a domain, their technical contact email, and which ISP hosts their IP block without touching the target host.',
+    beginnerPitfall: 'Many modern registrars enable WHOIS privacy protection (e.g. Domains By Proxy), masking personal names. Always look at the Nameservers (NS records) and Organization fields instead.',
+    factCheckNotes: 'RFC 3912 standard WHOIS client standard in all Kali Linux distributions.',
     mitreId: 'T1596.002',
     outputExample: `Domain Name: TARGET.COM
 Registry Domain ID: 2138941_DOMAIN_COM-VRSN
@@ -247,6 +255,10 @@ vpn.target.com`,
     scenario: 'Essential host enumeration during infrastructure pentesting to find non-standard ports (e.g., SSH on 2222, Tomcat on 8080, MySQL on 3306).',
     noiseLevel: 'noisy',
     phase: 'Discovery',
+    learningLevel: 'Intermediate',
+    mentalModel: 'Sends TCP SYN probes to all 65,535 possible network ports. When a port responds, Nmap completes handshakes to fingerprint exact software daemon versions and runs default vulnerability detection scripts.',
+    beginnerPitfall: 'Scanning all ports (-p-) without -T4 can take several hours on slow connections. Also, default scripts (-sC) actively probe ports, generating high volume alerts on target SIEM/EDR platforms.',
+    factCheckNotes: 'Nmap 7.94+ verified in Kali Linux. Default safe scripts execute within the Lua-based NSE sandbox.',
     mitreId: 'T1046',
     outputExample: `Starting Nmap 7.94 ( https://nmap.org )
 Nmap scan report for 192.168.1.50
@@ -278,6 +290,10 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel`,
     scenario: 'Used when stealth or speed is needed against a hardened firewall or when performing initial perimeter scans against thousands of hosts.',
     noiseLevel: 'moderate',
     phase: 'Discovery',
+    learningLevel: 'Beginner',
+    mentalModel: 'Sends a TCP SYN packet (like knocking on a door). If the server answers with SYN-ACK (door opened), Nmap immediately sends RST (walk away) without completing connection, evading application-level logging.',
+    beginnerPitfall: 'Running -sS without "sudo" or root privileges will silently fail back to a standard TCP Connect scan (-sT), which establishes full 3-way handshakes and appears immediately in web server connection logs.',
+    factCheckNotes: 'Requires raw socket access via CAP_NET_RAW or sudo. Verified on Linux kernel 6.8+ in Kali.',
     mitreId: 'T1046',
     outputExample: `Nmap scan report for target.com (198.51.100.10)
 Host is up (0.024s latency).
