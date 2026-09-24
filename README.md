@@ -10,9 +10,9 @@
 ![Vercel](https://img.shields.io/badge/Deploy_on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)
 
-**A tactile Claymorphic, battle-tested Kali Linux reference platform for Penetration Testers, Red Teamers, and SOC Analysts.**
+**A tactile Claymorphic, beginner-friendly, battle-tested Kali Linux reference platform for Penetration Testers, Red Teamers, and SOC Analysts.**
 
-[Features](#-key-features) • [Claymorphism & Motion](#-claymorphism--motion-experience) • [Installation](#-getting-started) • [Deployment](#-deploying-to-vercel) • [Disclaimer](#%EF%B8%8F-legal--ethical-disclaimer)
+[Setup Guide](#-interactive-kali-linux-setup-station-windows--mac) • [Learning Curve](#-beginner-friendly-progressive-learning-curve) • [Features](#-key-features) • [Installation](#-getting-started) • [Deployment](#-deploying-to-vercel)
 
 </div>
 
@@ -20,7 +20,68 @@
 
 ## 🌟 Overview
 
-**KaliVault** is a web-based cybersecurity command intelligence hub and interactive Kali Linux terminal simulator built entirely in a high-fidelity **Claymorphism** design system. It bridges the gap between static cheat-sheets and practical tactical tradecraft, cataloging **45+ essential offensive and defensive security commands** across 9 domains with flag-by-flag breakdowns, MITRE ATT&CK mapping, and authentic simulated outputs.
+**KaliVault** is a web-based cybersecurity command intelligence hub, interactive setup guide, and Kali Linux terminal simulator built entirely in a high-fidelity **Claymorphism** design system. Designed specifically with a progressive learning curve for beginners while retaining deep technical fidelity for experienced operators, it catalogs **45+ essential commands** across 9 domains with plain-English mental models, common pitfall warnings, and 100% fact-checked Kali Linux 2024.x syntax.
+
+---
+
+## 🖥️ Interactive Kali Linux Setup Station (Windows & Mac)
+
+KaliVault features a dedicated **Setup Guide** with a top navbar shortcut key providing an interactive, distraction-free environment to get your personal Kali Linux lab running smoothly:
+
+### 🪟 Windows Deployment Methods
+1. **WSL2 + Win-KeX (Windows Subsystem for Linux - ⭐ Recommended)**:
+   - Ultra-fast ~2-second boot with zero virtual machine lag.
+   - Full graphical XFCE desktop inside Windows with shared audio, clipboard, and `/mnt/c/` filesystem integration.
+   - Command: `wsl --install -d kali-linux && sudo apt install -y kali-win-kex && kex --win -s`.
+2. **VirtualBox / VMware Workstation (Isolated Sandbox)**:
+   - Pre-configured official OVA appliances from `kali.org`.
+   - Complete sandbox isolation, instant snapshot rollbacks, and USB Wi-Fi adapter pass-through for wireless auditing.
+3. **Live USB with Encrypted Persistence**:
+   - Zero-footprint, LUKS-encrypted portable pentest drive created via Rufus.
+
+### 🍎 macOS Deployment Methods
+1. **UTM for Apple Silicon (M1/M2/M3/M4 - ⭐ Recommended)**:
+   - Native ARM64 virtualization utilizing Apple's Hypervisor framework.
+   - Near bare-metal speed, crisp Retina display auto-scaling via `spice-vdagent`, and minimal battery consumption.
+   - **Crucial Fact-Check**: Uses native ARM64 installer ISO (`kali-linux-*-installer-arm64.iso`), avoiding sluggish x86 emulation.
+2. **VMware Fusion Pro (Free for Personal Use)**:
+   - Official Broadcom free personal license with official pre-built ARM64 VMware appliance.
+3. **Intel Mac (x86_64)**:
+   - VirtualBox configuration for legacy Intel-based Mac hardware.
+
+### 🧭 Interactive Setup Features
+- **Live Step-by-Step Progress Tracker**: Check off completed steps with persistent local storage saving and celebratory completion badges.
+- **Interactive Code Blocks & Outputs**: 1-click command copying and simulated terminal execution.
+- **Diagnostic Troubleshooting Matrix**: Instant, battle-tested solutions for the 6 most common beginner installation blockers:
+  - *VirtualBox VT-x / AMD-V disabled in BIOS*
+  - *WSL2 Win-KeX socket connection refused*
+  - *Mac Apple Silicon architecture mismatch*
+  - *VM display stuck at 800x600 resolution*
+  - *No internet inside Kali VM / DNS failure*
+  - *apt update repository suite change errors*
+- **Essential Post-Install Tuning Checklist**: `passwd`, `sudo apt full-upgrade`, `kali-linux-default` metapackage, and Zsh productivity tweaks.
+
+---
+
+## 🎓 Beginner-Friendly Progressive Learning Curve
+
+Every command and tool has been rigorously fact-checked and structured into progressive mastery levels:
+
+- **Level 1: Core Fundamentals (🌱 Beginner)**: Passive OSINT, basic network sweeps, whois lookups, local file analysis. Zero risk of detection or misconfiguration.
+- **Level 2: Tactical Assessment (⚡ Intermediate)**: Targeted port scanning with Nmap, web fuzzing with Gobuster/FFuF, automated SQL injection testing with SQLMap, password auditing with Hydra.
+- **Level 3: Red Team Operator (🔥 Advanced)**: Metasploit handlers, LinPEAS privilege escalation, pivoting tunnels via Chisel/Ligolo-ng, and reverse engineering.
+
+### 🧠 Under-the-Hood Mental Models
+Expandable cards explain the **plain-English networking and OS mechanics**:
+- *Why does a SYN scan work?* (Knocking on the door and walking away before the 3-way handshake completes).
+- *What happens during an ARP sweep?* (Broadcasting Layer-2 identity queries across the local subnet).
+- *What is blind SQL injection?* (Inferring true/false conditions via mathematical delays).
+
+### ⚠️ Common Beginner Pitfall Warnings
+Actionable warnings highlight real-world traps:
+- Forgetting `sudo` on Nmap scans (silently falling back to TCP connect mode).
+- Excessive threading (`-t 64`) triggering immediate Fail2Ban firewalls.
+- Single Page Applications producing false-positive 200 OKs during directory fuzzing.
 
 ---
 
@@ -58,49 +119,24 @@
   - **Nuclei v3**: Overhauled AST fuzzing and multi-protocol flow engine.
   - **Havoc C2**: Modern post-exploitation command and control with EDR-evasive Demon payloads.
   - **Caido CLI**: Lightweight, high-speed Rust-based alternative to Burp Suite.
-  - **DonPAPI, Katana, Coercer, Enum4linux-ng**: Modernized toolsets for stealth credential harvesting, deep crawling, and NTLM coercion.
 - **Interactive features**: Filter by change type (`New Tool`, `Major Upgrade`, `Replacement`, `Core Upgrade`), 1-click APT install command copy, and simulated terminal execution.
 
 ### 🛡️ 2. Curated Cybersecurity Command Vault
 - **45+ production-grade commands** mapped to real-world offensive engagements and the MITRE ATT&CK matrix.
-- **9 Core Security Domains**:
-  - 🔍 **OSINT & Reconnaissance** (`theHarvester`, `whois`, `amass`, `dnsrecon`, `sublist3r`)
-  - 🌐 **Network & Port Scanning** (`nmap`, `masscan`, `netdiscover`, `arp-scan`)
-  - 🛡️ **Web Application Pentesting** (`sqlmap`, `nikto`, `gobuster`, `ffuf`, `wpscan`, `commix`)
-  - ⚡ **Exploitation & Weaponization** (`msfconsole`, `msfvenom`, `searchsploit`, `netexec`)
-  - 🔑 **Password Attacks & Cracking** (`hydra`, `john the ripper`, `hashcat`, `cewl`)
-  - 📡 **Wireless & RF Security** (`airmon-ng`, `airodump-ng`, `aireplay-ng`, `aircrack-ng`)
-  - 🕵️ **Privilege Escalation & Post-Exploit** (`linpeas`, `chisel`, `pypykatz`, `pspy`, `find SUID`)
-  - 🔬 **Digital Forensics & Reverse Engineering** (`binwalk`, `volatility`, `strings`, `exiftool`, `radare2`)
-  - 🛠️ **Pivoting & Network Traffic** (`tcpdump`, `tshark`, `netcat / nc`, `socat`)
+- Filter by Category, OpSec Noise Level, MITRE Phase, and **Learning Level**.
 
-### 📋 3. Deep Technical Command Cards
-- **Exact Syntax & Real-World Examples**: Copy-ready commands with realistic parameters.
-- **Flag-by-Flag Explanations**: Deep breakdown of every argument (`-sC`, `-sV`, `-p-`, `-T4`, `--batch`, etc.).
-- **OpSec Noise Rating Badges**: `Stealth / Passive`, `Low Noise`, `Moderate Noise`, and `High Noise / Active`.
-- **Analyst Scenario & Context**: Explains when and why security professionals use each tool during an assessment.
-- **Simulated Terminal Output**: Expandable authentic outputs demonstrating expected tool behavior.
-- **One-Click Copy & Bookmarks**: Save favorite commands with local persistence.
-
-### 💻 4. Interactive Kali Terminal Simulator (`kali@kali:~$`)
-- Tactile clay shell container with scanlines and authentic zsh prompt.
+### 💻 3. Interactive Kali Terminal Simulator (`kali@kali:~$`)
+- Retro-modern Kali Linux terminal interface with scanlines and zsh prompt.
 - **Command History**: Browse through previous commands with <kbd>↑</kbd> and <kbd>↓</kbd> keys.
 - **Built-in Shell Commands**: `help`, `clear`, `whoami`, `id`, `uname -a`, `neofetch`, `ls`, `history`, `matrix`.
-- **Pre-Programmed Simulation**: Type or click "Run in Terminal" on any command card to see colored, realistic tool output.
 
-### ⚙️ 5. Dynamic Interactive Command Builder
-- Visual parameter builder for top complex tools:
-  - **Nmap**: Configure scan types (SYN, Connect, UDP, ACK), port ranges, timing templates, NSE scripts, and evasion flags.
-  - **SQLMap**: Set target URL, extraction targets (`--dbs`, `--tables`, `--dump`, `--os-shell`), level, risk, and threads.
-  - **Hydra**: Select service (SSH, FTP, RDP, SMB, HTTP), user/password lists, and concurrency.
-  - **Msfvenom**: Choose OS platform (Windows, Linux, Android, PHP), architecture, payload type, and output formats.
-- Live real-time command generation with 1-click execution into the terminal simulator.
+### ⚙️ 4. Dynamic Interactive Command Builder
+- Visual parameter builder for complex tools (Nmap, SQLMap, Hydra, Msfvenom). Live real-time command generation with 1-click execution into the terminal simulator.
 
-### 🎯 6. Cybersecurity Scenario Challenge (Quiz)
+### 🎯 5. Cybersecurity Scenario Challenge (Quiz)
 - Interactive scenario questions testing tactical decision-making in realistic pentest conditions.
-- Instant feedback with technical explanations and scoring rank.
 
-### 📥 7. Tactical Cheat Sheet Exporter
+### 📥 6. Tactical Cheat Sheet Exporter
 - Export all commands or only bookmarked favorites into formatted Markdown (`.md`) or plain text (`.txt`).
 
 ---
@@ -114,18 +150,20 @@ kalivault/
 │   ├── components/
 │   │   ├── ClayKaliSplash.tsx          # 3s Kali logo random-corner intro animation
 │   │   ├── CommandBuilder.tsx          # Interactive command generator
-│   │   ├── CommandCard.tsx             # In-depth card with flags & output
-│   │   ├── CommandVault.tsx            # Search, filters, and category grid
+│   │   ├── CommandCard.tsx             # Card with learning levels, mental models & output
+│   │   ├── CommandVault.tsx            # Search, learning filters & category grid
 │   │   ├── CyberQuiz.tsx               # Scenario quiz challenge
 │   │   ├── ExportModal.tsx             # Markdown/Text exporter
 │   │   ├── Header.tsx                  # Navigation, theme slider & stats header
+│   │   ├── KaliSetupGuide.tsx          # Interactive Win & Mac Setup Station
 │   │   ├── LatestReleases.tsx          # Latest Tools & Releases Radar
 │   │   ├── TerminalSimulator.tsx       # Interactive Kali web CLI
 │   │   └── ThemeTransitionWave.tsx     # Morphing shockwave theme ripple
 │   ├── data/
 │   │   ├── commandsData.ts             # 45+ curated commands catalog
 │   │   ├── latestToolsData.ts          # Updated/added Kali tools database
-│   │   └── quizData.ts                 # Scenario quiz questions
+│   │   ├── quizData.ts                 # Scenario quiz questions
+│   │   └── setupGuideData.ts           # Windows & Mac step-by-step setup guides
 │   ├── App.tsx                         # Main layout & theme coordinator
 │   ├── index.css                       # Claymorphism CSS tokens & animations
 │   ├── main.tsx                        # React DOM entrypoint
@@ -174,7 +212,7 @@ kalivault/
 1. Ensure all changes are committed:
    ```bash
    git add .
-   git commit -m "feat: complete KaliVault with Claymorphism and Kali logo splash"
+   git commit -m "feat: complete KaliVault with Setup Guide and Learning Curves"
    ```
 
 2. Create a new repository on [GitHub](https://github.com/new) (e.g., `kalivault`).
