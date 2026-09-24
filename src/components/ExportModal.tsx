@@ -95,50 +95,59 @@ export const ExportModal: React.FC<ExportModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl clay-card overflow-hidden flex flex-col max-h-[90vh] shadow-2xl">
         
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/60">
-          <div className="flex items-center space-x-2">
-            <FileText className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-sm font-semibold text-white">Export Kali Cheat Sheet</h3>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
+              <FileText className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
+                Export Kali Tactical Sheet
+              </h3>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                Generate offline markdown or text field reference
+              </p>
+            </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            className="clay-btn p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Modal Options */}
-        <div className="p-6 space-y-4 overflow-y-auto">
+        <div className="p-6 space-y-5 overflow-y-auto">
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Scope */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2 font-mono">
                 Export Scope
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setExportScope('all')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportScope === 'all'
-                      ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
+                      ? 'clay-btn-primary'
+                      : 'clay-btn text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   All ({commands.length})
                 </button>
                 <button
                   onClick={() => setExportScope('bookmarks')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportScope === 'bookmarks'
-                      ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
+                      ? 'clay-btn-primary'
+                      : 'clay-btn text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   Bookmarks ({bookmarkedIds.size})
@@ -148,26 +157,26 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
             {/* Format */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2 font-mono">
                 Format
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setExportFormat('markdown')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportFormat === 'markdown'
-                      ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
+                      ? 'clay-btn-primary'
+                      : 'clay-btn text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   Markdown (.md)
                 </button>
                 <button
                   onClick={() => setExportFormat('text')}
-                  className={`px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportFormat === 'text'
-                      ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
+                      ? 'clay-btn-primary'
+                      : 'clay-btn text-slate-600 dark:text-slate-300'
                   }`}
                 >
                   Plain Text (.txt)
@@ -179,10 +188,15 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
           {/* Preview Box */}
           <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
-              Preview ({targetCommands.length} commands)
-            </label>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90 font-mono text-xs text-slate-300 max-h-56 overflow-y-auto leading-relaxed whitespace-pre-wrap select-all">
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider font-mono">
+                Preview ({targetCommands.length} commands)
+              </label>
+              <span className="text-[10px] text-slate-400 font-mono">
+                Ready to compile
+              </span>
+            </div>
+            <div className="clay-inset p-4 rounded-2xl font-mono text-xs text-slate-800 dark:text-slate-200 max-h-56 overflow-y-auto leading-relaxed whitespace-pre-wrap select-all">
               {exportContent}
             </div>
           </div>
@@ -190,24 +204,24 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="flex items-center justify-end space-x-3 px-6 py-4 border-t border-slate-800 bg-slate-950/60">
+        <div className="flex items-center justify-end space-x-3 px-6 py-4 border-t border-slate-200 dark:border-slate-800">
           <button
             onClick={handleCopy}
-            className={`flex items-center space-x-1.5 px-4 py-2 rounded-lg text-xs font-medium border transition-colors ${
+            className={`clay-btn flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs font-bold cursor-pointer ${
               copied
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                : 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700'
+                ? 'text-emerald-600 dark:text-emerald-400'
+                : 'text-slate-700 dark:text-slate-200'
             }`}
           >
-            {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-            <span>{copied ? 'Copied!' : 'Copy to Clipboard'}</span>
+            {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+            <span>{copied ? 'Copied to Clipboard!' : 'Copy to Clipboard'}</span>
           </button>
 
           <button
             onClick={handleDownload}
-            className="flex items-center space-x-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors shadow-md shadow-cyan-500/20"
+            className="clay-btn-primary flex items-center space-x-2 px-6 py-2.5 rounded-xl text-xs font-bold cursor-pointer"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-4 h-4" />
             <span>Download File</span>
           </button>
         </div>

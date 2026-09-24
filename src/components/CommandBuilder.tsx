@@ -123,25 +123,25 @@ export const CommandBuilder: React.FC<CommandBuilderProps> = ({ onRunInTerminal 
   return (
     <div className="space-y-6">
       
-      {/* Tool Selector Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-3">
-        <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2 flex items-center gap-1.5">
-          <Wrench className="w-4 h-4 text-purple-400" />
+      {/* Tool Selector Tabs (Tactile Clay) */}
+      <div className="flex flex-wrap items-center gap-2.5 pb-2">
+        <span className="clay-badge px-3 py-1.5 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mr-2 flex items-center gap-1.5">
+          <Wrench className="w-3.5 h-3.5 text-purple-500" />
           Select Tool:
         </span>
         {[
-          { id: 'nmap', label: 'Nmap Port Scanner', color: 'border-emerald-500/40 text-emerald-300' },
-          { id: 'sqlmap', label: 'SQLMap SQLi Exploiter', color: 'border-amber-500/40 text-amber-300' },
-          { id: 'hydra', label: 'Hydra Network Cracker', color: 'border-rose-500/40 text-rose-300' },
-          { id: 'msfvenom', label: 'Msfvenom Payload Crafter', color: 'border-cyan-500/40 text-cyan-300' }
+          { id: 'nmap', label: 'Nmap Port Scanner' },
+          { id: 'sqlmap', label: 'SQLMap SQLi Exploiter' },
+          { id: 'hydra', label: 'Hydra Network Cracker' },
+          { id: 'msfvenom', label: 'Msfvenom Payload Crafter' }
         ].map((tool) => (
           <button
             key={tool.id}
             onClick={() => setActiveTool(tool.id as ToolChoice)}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`clay-btn px-4 py-2 text-xs font-bold transition-all ${
               activeTool === tool.id
-                ? 'bg-slate-800 text-white shadow-lg border ' + tool.color
-                : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800'
+                ? 'clay-btn-primary shadow-lg'
+                : 'text-slate-600 dark:text-slate-300'
             }`}
           >
             {tool.label}
@@ -149,8 +149,8 @@ export const CommandBuilder: React.FC<CommandBuilderProps> = ({ onRunInTerminal 
         ))}
       </div>
 
-      {/* Dynamic Builder Form */}
-      <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-6">
+      {/* Dynamic Builder Form (Clay Card) */}
+      <div className="clay-card p-6 sm:p-8 space-y-6">
         
         {/* NMAP FORM */}
         {activeTool === 'nmap' && (
@@ -613,39 +613,39 @@ export const CommandBuilder: React.FC<CommandBuilderProps> = ({ onRunInTerminal 
 
       </div>
 
-      {/* Generated Command Preview Bar */}
-      <div className="p-5 rounded-2xl bg-[#060911] border border-cyan-500/40 shadow-xl space-y-3">
+      {/* Generated Command Preview Bar (Clay Card) */}
+      <div className="clay-card p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-mono font-semibold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
+          <span className="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" />
             Constructed Live Command:
           </span>
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="clay-badge px-2.5 py-0.5 text-[10px] font-mono text-slate-500 dark:text-slate-400">
             Ready to copy & execute
           </span>
         </div>
 
-        <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs sm:text-sm text-emerald-400 overflow-x-auto select-all">
-          <span className="text-slate-500 select-none mr-2">$</span>
+        <div className="clay-inset p-4 bg-[#070b14] dark:bg-[#050810] font-mono text-xs sm:text-sm text-emerald-400 overflow-x-auto select-all rounded-xl">
+          <span className="text-slate-500 select-none mr-2 font-normal">$</span>
           {generatedCommand}
         </div>
 
-        <div className="flex items-center justify-end space-x-3 pt-1">
+        <div className="flex flex-wrap items-center justify-end gap-3 pt-1">
           <button
             onClick={handleCopy}
-            className={`flex items-center space-x-1.5 px-4 py-2 rounded-lg text-xs font-medium border transition-colors ${
+            className={`clay-btn flex items-center space-x-2 px-5 py-2.5 text-xs font-bold transition-all ${
               copied
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                : 'bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700'
+                ? 'text-emerald-600 dark:text-emerald-400'
+                : 'text-slate-700 dark:text-slate-200'
             }`}
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copied ? 'Copied to Clipboard!' : 'Copy Command'}</span>
           </button>
 
           <button
             onClick={() => onRunInTerminal(generatedCommand)}
-            className="flex items-center space-x-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 hover:brightness-110 transition-all shadow-md shadow-cyan-500/20"
+            className="clay-btn-primary flex items-center space-x-2 px-6 py-2.5 text-xs font-bold transition-all"
           >
             <Terminal className="w-3.5 h-3.5" />
             <span>Launch in Kali Terminal</span>
