@@ -25,7 +25,21 @@
 
 ## ⚡ Key Features
 
-### 🛡️ 1. Curated Cybersecurity Command Vault
+### 🔥 1. Latest Tools & Releases Radar (New in Kali Linux)
+- Dedicated section with a **direct navbar shortcut** tracking tools recently added, upgraded, or replaced in modern Kali releases (Kali 2024.x & 2025+).
+- **Major Highlights & Successors**:
+  - **NetExec (`nxc`)**: Official successor replacing CrackMapExec with PKINIT, Kerberos certificates, and modern AD dumping.
+  - **BloodHound CE**: Ground-up rewrite replacing legacy Electron/Neo4j with a containerized PostgreSQL + OpenCypher stack and Azure / Entra ID attack pathing.
+  - **Ligolo-ng**: Next-generation pivoting creating native TUN interfaces on the attacker machine, eliminating proxychains and SOCKS performance bottlenecks.
+  - **Certipy**: Automated Active Directory Certificate Services (ADCS) enumeration and escalation (ESC1 - ESC13).
+  - **Snort 3**: Multithreaded modern network intrusion detection/prevention engine upgrade.
+  - **Nuclei v3**: Overhauled AST fuzzing and multi-protocol flow engine.
+  - **Havoc C2**: Modern post-exploitation command and control with EDR-evasive Demon payloads.
+  - **Caido CLI**: Lightweight, high-speed Rust-based alternative to Burp Suite.
+  - **DonPAPI, Katana, Coercer, Enum4linux-ng**: Modernized toolsets for stealth credential harvesting, deep crawling, and NTLM coercion.
+- **Interactive features**: Filter by change type (`New Tool`, `Major Upgrade`, `Replacement`, `Core Upgrade`), 1-click APT install command copy, and simulated terminal execution.
+
+### 🛡️ 2. Curated Cybersecurity Command Vault
 - **45+ production-grade commands** mapped to real-world offensive engagements and the MITRE ATT&CK matrix.
 - **9 Core Security Domains**:
   - 🔍 **OSINT & Reconnaissance** (`theHarvester`, `whois`, `amass`, `dnsrecon`, `sublist3r`)
