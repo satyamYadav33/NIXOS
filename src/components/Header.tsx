@@ -1,9 +1,9 @@
 import React from 'react';
-import { Terminal, Shield, Bookmark, Wrench, HelpCircle, Download, Search, Sparkles } from 'lucide-react';
+import { Terminal, Shield, Bookmark, Wrench, HelpCircle, Download, Search, Sparkles, Flame } from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: 'vault' | 'terminal' | 'builder' | 'quiz';
-  setActiveTab: (tab: 'vault' | 'terminal' | 'builder' | 'quiz') => void;
+  activeTab: 'vault' | 'terminal' | 'builder' | 'quiz' | 'releases';
+  setActiveTab: (tab: 'vault' | 'terminal' | 'builder' | 'quiz' | 'releases') => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   bookmarkCount: number;
@@ -170,6 +170,21 @@ export const Header: React.FC<HeaderProps> = ({
             <HelpCircle className="w-4 h-4 text-amber-400" />
             <span>Cyber Quiz</span>
             <Sparkles className="w-3 h-3 text-amber-400" />
+          </button>
+
+          <button
+            onClick={() => setActiveTab('releases')}
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-md font-medium transition-all ${
+              activeTab === 'releases'
+                ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30 shadow-sm shadow-rose-500/20'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 border border-transparent'
+            }`}
+          >
+            <Flame className="w-4 h-4 text-rose-400" />
+            <span>Latest Tools & Releases</span>
+            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-bold uppercase tracking-wider bg-rose-500 text-white animate-pulse">
+              NEW
+            </span>
           </button>
         </div>
 

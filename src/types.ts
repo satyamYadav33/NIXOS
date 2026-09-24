@@ -74,3 +74,24 @@ export interface CategoryMeta {
   borderColor: string;
   badgeBg: string;
 }
+
+export type ToolChangeType = 'new' | 'major_update' | 'replacement' | 'core_upgrade';
+
+export interface LatestTool {
+  id: string;
+  name: string;
+  packageName: string;
+  releaseVersion: string;
+  category: string;
+  changeType: ToolChangeType;
+  headline: string;
+  description: string;
+  whyItMatters: string;
+  installCmd: string;
+  keyFeatures: string[];
+  replacedTool?: string;
+  docsUrl: string;
+  demoCommand?: string;
+  badgeText?: string;
+}
+

@@ -5,11 +5,12 @@ import { CommandVault } from './components/CommandVault';
 import { TerminalSimulator } from './components/TerminalSimulator';
 import { CommandBuilder } from './components/CommandBuilder';
 import { CyberQuiz } from './components/CyberQuiz';
+import { LatestReleases } from './components/LatestReleases';
 import { ExportModal } from './components/ExportModal';
-import { ShieldAlert, Terminal, ExternalLink } from 'lucide-react';
+import { ShieldAlert, Terminal, ExternalLink, Flame } from 'lucide-react';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<'vault' | 'terminal' | 'builder' | 'quiz'>('vault');
+  const [activeTab, setActiveTab] = useState<'vault' | 'terminal' | 'builder' | 'quiz' | 'releases'>('vault');
   const [searchQuery, setSearchQuery] = useState('');
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
   const [isExportOpen, setIsExportOpen] = useState(false);
@@ -87,15 +88,22 @@ export function App() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4 text-xs font-mono text-slate-400 self-end sm:self-center">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400 self-end sm:self-center">
+            <button
+              onClick={() => setActiveTab('releases')}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 hover:bg-rose-500/25 transition-colors cursor-pointer"
+            >
+              <Flame className="w-3.5 h-3.5 text-rose-400" />
+              <span>Latest Tools Radar</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span>
+            </button>
+            <span className="text-slate-600 hidden sm:inline">|</span>
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               45+ Commands
             </span>
-            <span className="text-slate-600">|</span>
+            <span className="text-slate-600 hidden sm:inline">|</span>
             <span>9 Domains</span>
-            <span className="text-slate-600">|</span>
-            <span className="text-cyan-400">MITRE Aligned</span>
           </div>
         </div>
 
@@ -128,6 +136,12 @@ export function App() {
 
         {activeTab === 'quiz' && (
           <CyberQuiz />
+        )}
+
+        {activeTab === 'releases' && (
+          <LatestReleases
+            onRunInTerminal={handleRunInTerminal}
+          />
         )}
 
       </main>
