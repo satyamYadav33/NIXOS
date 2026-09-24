@@ -208,7 +208,7 @@ Knock, knock, Neo.`;
       
       {/* Quick-run pills (Tactile Clay) */}
       <div className="flex items-center space-x-2.5 overflow-x-auto pb-2 text-xs no-scrollbar px-1">
-        <span className="clay-badge px-3 py-1 text-slate-500 dark:text-slate-400 uppercase font-bold text-[10px] tracking-wider shrink-0 flex items-center gap-1.5">
+        <span className="clay-badge px-3 py-1 text-slate-700 dark:text-slate-300 uppercase font-bold text-[10px] tracking-wider shrink-0 flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5 text-cyan-500" />
           Quick Launch:
         </span>
@@ -216,7 +216,7 @@ Knock, knock, Neo.`;
           <button
             key={i}
             onClick={() => handleExecuteCommand(qc)}
-            className="clay-btn shrink-0 px-3.5 py-1.5 text-slate-700 dark:text-slate-300 hover:text-cyan-500 font-mono text-[11px]"
+            className="clay-btn shrink-0 px-3.5 py-1.5 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 font-mono text-[11px] font-medium cursor-pointer"
           >
             {qc}
           </button>
@@ -232,7 +232,7 @@ Knock, knock, Neo.`;
             <span className="w-3 h-3 rounded-full bg-rose-500 inline-block shadow-sm"></span>
             <span className="w-3 h-3 rounded-full bg-amber-500 inline-block shadow-sm"></span>
             <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-sm"></span>
-            <span className="text-xs font-mono text-slate-600 dark:text-slate-300 ml-2 font-bold flex items-center gap-1.5">
+            <span className="text-xs font-mono text-slate-800 dark:text-slate-200 ml-2 font-bold flex items-center gap-1.5">
               <TerminalIcon className="w-3.5 h-3.5 text-cyan-500" />
               kali@kali: ~ (zsh)
             </span>
@@ -242,14 +242,14 @@ Knock, knock, Neo.`;
             <button
               onClick={handleCopyAll}
               title="Copy Terminal Transcript"
-              className="clay-btn p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              className="clay-btn p-2 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition-colors cursor-pointer"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
             <button
               onClick={() => setLines([])}
               title="Clear Terminal"
-              className="clay-btn p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              className="clay-btn p-2 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
@@ -312,9 +312,9 @@ Knock, knock, Neo.`;
 
       </div>
 
-      <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between px-2 font-mono">
-        <span>Tip: Use <kbd className="clay-badge px-2 py-0.5 text-slate-700 dark:text-slate-300">↑</kbd> and <kbd className="clay-badge px-2 py-0.5 text-slate-700 dark:text-slate-300">↓</kbd> arrows to navigate command history</span>
-        <span className="clay-badge px-2.5 py-0.5 text-[10px]">Simulated Shell Environment</span>
+      <div className="text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between px-2 font-mono font-medium">
+        <span>Tip: Use <kbd className="clay-badge px-2 py-0.5 text-slate-800 dark:text-slate-200 font-bold">↑</kbd> and <kbd className="clay-badge px-2 py-0.5 text-slate-800 dark:text-slate-200 font-bold">↓</kbd> arrows to navigate command history</span>
+        <span className="clay-badge px-2.5 py-0.5 text-[10px] font-bold text-slate-700 dark:text-slate-300">Simulated Shell Environment</span>
       </div>
 
     </div>

@@ -57,17 +57,17 @@ export const CyberQuiz: React.FC = () => {
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100 font-mono">
+            <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 font-mono">
               Cybersecurity Scenario Challenge
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">
               Test tactical Kali command selection under realistic engagement constraints
             </p>
           </div>
         </div>
 
         {!isFinished && (
-          <div className="clay-badge text-xs font-mono text-slate-600 dark:text-slate-300 px-3.5 py-1.5 font-bold">
+          <div className="clay-badge text-xs font-mono text-slate-800 dark:text-slate-200 px-3.5 py-1.5 font-bold">
             Question <span className="text-cyan-600 dark:text-cyan-400">{currentIdx + 1}</span> / {QUIZ_QUESTIONS.length}
           </div>
         )}
@@ -82,20 +82,20 @@ export const CyberQuiz: React.FC = () => {
               <ShieldCheck className="w-4 h-4" />
               Tactical Engagement Scenario:
             </span>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-sans font-medium">
               {currentQ.scenario}
             </p>
           </div>
 
           {/* Question Text */}
-          <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100">
+          <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 font-mono">
             {currentQ.question}
           </h3>
 
           {/* Options Grid */}
           <div className="space-y-3">
             {currentQ.options.map((option, idx) => {
-              let btnStyle = 'clay-btn text-slate-700 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400';
+              let btnStyle = 'clay-btn text-slate-800 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 font-semibold';
               
               if (isAnswered) {
                 if (idx === currentQ.answer) {
@@ -115,7 +115,7 @@ export const CyberQuiz: React.FC = () => {
                   className={`w-full text-left p-4 rounded-2xl text-xs sm:text-sm font-mono transition-all flex items-center justify-between gap-3 cursor-pointer ${btnStyle}`}
                 >
                   <div className="flex items-center space-x-3 overflow-hidden">
-                    <span className="w-7 h-7 rounded-xl clay-inset flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300 shrink-0">
+                    <span className="w-7 h-7 rounded-xl clay-inset flex items-center justify-center text-xs font-bold text-slate-800 dark:text-slate-200 shrink-0">
                       {String.fromCharCode(65 + idx)}
                     </span>
                     <span className="overflow-x-auto select-text font-medium">{option}</span>
@@ -139,7 +139,7 @@ export const CyberQuiz: React.FC = () => {
                 <Sparkles className="w-3.5 h-3.5" />
                 Technical Debrief:
               </span>
-              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+              <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-sans font-medium">
                 {currentQ.explanation}
               </p>
             </div>
@@ -170,7 +170,7 @@ export const CyberQuiz: React.FC = () => {
             <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono">
               Engagement Completed!
             </h3>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 font-medium">
               Tactical performance summary across offensive penetration testing questions:
             </p>
           </div>
@@ -185,7 +185,7 @@ export const CyberQuiz: React.FC = () => {
             </span>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-w-md mx-auto leading-relaxed font-medium">
             {score === QUIZ_QUESTIONS.length 
               ? 'Flawless execution! You demonstrate mastery of Kali Linux toolchain tradecraft and offensive methodologies.'
               : 'Great effort! Practice commands hands-on in the Terminal Simulator and review weaponization flags to level up.'}

@@ -183,21 +183,21 @@ export const CommandCard: React.FC<CommandCardProps> = ({
         {/* Command Title & Description */}
         <div>
           <div className="flex items-center justify-between">
-            <h3 className="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 group-hover:text-cyan-500 transition-colors">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
               {command.name}
             </h3>
             
             {/* Fact Check Seal */}
             <span 
               title="Verified against official Kali Linux 2024.x documentation and tested in live lab"
-              className="flex items-center gap-1 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold shrink-0 ml-2"
+              className="flex items-center gap-1 text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-bold shrink-0 ml-2"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
               <span className="hidden sm:inline">Fact-Checked</span>
             </span>
           </div>
 
-          <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+          <p className="text-xs text-slate-700 dark:text-slate-300 mt-1 leading-relaxed font-normal">
             {command.description}
           </p>
         </div>
@@ -205,8 +205,8 @@ export const CommandCard: React.FC<CommandCardProps> = ({
         {/* Command Box (Recessed Clay) */}
         <div className="clay-inset p-3.5 font-mono text-xs">
           <div className="flex items-center justify-between gap-2">
-            <div className="flex-1 overflow-x-auto text-emerald-600 dark:text-emerald-400 font-semibold py-1 pr-2 select-all">
-              <span className="text-slate-400 select-none mr-2 font-normal">$</span>
+            <div className="flex-1 overflow-x-auto text-emerald-700 dark:text-emerald-400 font-bold py-1 pr-2 select-all">
+              <span className="text-slate-500 dark:text-slate-400 select-none mr-2 font-normal">$</span>
               {command.command}
             </div>
             
@@ -216,17 +216,17 @@ export const CommandCard: React.FC<CommandCardProps> = ({
                 title="Copy Command to Clipboard"
                 className={`clay-btn p-2 text-xs transition-all cursor-pointer ${
                   copied
-                    ? 'text-emerald-600 dark:text-emerald-400 font-bold'
-                    : 'text-slate-600 dark:text-slate-300'
+                    ? 'text-emerald-700 dark:text-emerald-400 font-bold'
+                    : 'text-slate-700 dark:text-slate-300'
                 }`}
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
 
               <button
                 onClick={() => onRunInTerminal(command.command)}
                 title="Run in Kali Terminal Simulator"
-                className="clay-btn p-2 text-cyan-600 dark:text-cyan-400 hover:scale-105 transition-all cursor-pointer"
+                className="clay-btn p-2 text-cyan-700 dark:text-cyan-400 hover:scale-105 transition-all cursor-pointer"
               >
                 <Terminal className="w-3.5 h-3.5" />
               </button>
@@ -236,12 +236,12 @@ export const CommandCard: React.FC<CommandCardProps> = ({
 
         {/* Real-World Cybersecurity Scenario */}
         <div className="clay-inset p-3 text-xs flex items-start space-x-2.5">
-          <Info className="w-4 h-4 text-cyan-500 shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
           <div className="flex-1">
-            <span className="font-bold text-cyan-600 dark:text-cyan-400 text-[10px] block uppercase tracking-wider mb-0.5 font-mono">
+            <span className="font-bold text-cyan-700 dark:text-cyan-400 text-[10px] block uppercase tracking-wider mb-0.5 font-mono">
               Analyst Scenario & Engagement Context
             </span>
-            <p className="text-slate-600 dark:text-slate-300 leading-snug font-sans">
+            <p className="text-slate-800 dark:text-slate-200 leading-snug font-sans font-medium">
               {command.scenario}
             </p>
           </div>
@@ -297,10 +297,10 @@ export const CommandCard: React.FC<CommandCardProps> = ({
           <div className="clay-inset overflow-hidden">
             <button
               onClick={() => setShowFlags(!showFlags)}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors cursor-pointer"
+              className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-slate-800 dark:text-slate-200 hover:text-cyan-700 dark:hover:text-cyan-400 transition-colors cursor-pointer font-medium"
             >
-              <span className="flex items-center space-x-1.5 font-semibold">
-                <Tag className="w-3.5 h-3.5 text-cyan-500" />
+              <span className="flex items-center space-x-1.5 font-bold">
+                <Tag className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                 <span>Flag Breakdown ({command.flags.length})</span>
               </span>
               {showFlags ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -309,11 +309,11 @@ export const CommandCard: React.FC<CommandCardProps> = ({
             {showFlags && (
               <div className="px-3.5 pb-3 pt-1 space-y-2 border-t border-slate-200/60 dark:border-slate-800/60 text-xs">
                 {command.flags.map((f, idx) => (
-                  <div key={idx} className="flex items-start justify-between gap-3 py-1 border-b border-slate-200/40 dark:border-slate-800/40 last:border-0">
-                    <code className="text-cyan-600 dark:text-cyan-400 font-mono font-bold shrink-0 clay-badge px-2 py-0.5 text-[11px]">
+                  <div key={idx} className="flex items-start justify-between gap-3 py-1.5 border-b border-slate-200/60 dark:border-slate-800/40 last:border-0">
+                    <code className="text-cyan-700 dark:text-cyan-400 font-mono font-bold shrink-0 clay-badge px-2 py-0.5 text-[11px]">
                       {f.flag}
                     </code>
-                    <span className="text-slate-600 dark:text-slate-400 text-right text-[11px] leading-tight">
+                    <span className="text-slate-800 dark:text-slate-300 text-right text-[11px] leading-tight font-medium">
                       {f.description}
                     </span>
                   </div>
@@ -328,10 +328,10 @@ export const CommandCard: React.FC<CommandCardProps> = ({
           <div className="clay-inset overflow-hidden">
             <button
               onClick={() => setShowOutput(!showOutput)}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors cursor-pointer"
+              className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-slate-800 dark:text-slate-200 hover:text-cyan-700 dark:hover:text-cyan-400 transition-colors cursor-pointer font-medium"
             >
-              <span className="flex items-center space-x-1.5 font-semibold">
-                <Terminal className="w-3.5 h-3.5 text-emerald-500" />
+              <span className="flex items-center space-x-1.5 font-bold">
+                <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Simulated Output Preview</span>
               </span>
               {showOutput ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -339,7 +339,7 @@ export const CommandCard: React.FC<CommandCardProps> = ({
 
             {showOutput && (
               <div className="p-3.5 border-t border-slate-200/60 dark:border-slate-800/60 bg-[#060911] text-slate-200 font-mono text-[11px] overflow-x-auto max-h-52 scanlines rounded-b-xl">
-                <pre className="whitespace-pre text-emerald-400 leading-relaxed">
+                <pre className="whitespace-pre text-emerald-400 leading-relaxed font-semibold">
                   {command.outputExample}
                 </pre>
               </div>
@@ -349,10 +349,10 @@ export const CommandCard: React.FC<CommandCardProps> = ({
 
         {/* Pro Tip if available */}
         {command.tips && (
-          <div className="flex items-center space-x-2 text-[11px] text-slate-500 dark:text-slate-400 px-1 pt-1.5">
+          <div className="flex items-center space-x-2 text-[11px] text-slate-700 dark:text-slate-300 px-1 pt-1.5 font-medium">
             <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
             <span className="truncate">
-              <strong className="text-amber-600 dark:text-amber-400 font-semibold">Pro-Tip:</strong> {command.tips}
+              <strong className="text-amber-700 dark:text-amber-400 font-bold">Pro-Tip:</strong> {command.tips}
             </span>
           </div>
         )}

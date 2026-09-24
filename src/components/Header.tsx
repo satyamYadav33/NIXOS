@@ -68,11 +68,11 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="text-lg sm:text-xl font-black tracking-tight font-mono">
                   Kali<span className="text-cyan-500">Vault</span>
                 </span>
-                <span className="clay-badge px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase text-cyan-500">
+                <span className="clay-badge px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase text-cyan-600 dark:text-cyan-400">
                   CLAY SEC
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 hidden sm:block font-medium">
                 Tactical Kali Linux Intelligence Hub
               </p>
             </div>
@@ -81,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Quick Search Bar (Desktop) */}
           <div className="flex-1 max-w-md mx-2 hidden md:block">
             <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
@@ -90,12 +90,12 @@ export const Header: React.FC<HeaderProps> = ({
                   if (activeTab !== 'vault') setActiveTab('vault');
                 }}
                 placeholder={`Search ${totalCommandsCount} commands by tool, flag, scenario...`}
-                className="w-full pl-10 pr-4 py-2 text-xs font-mono clay-inset rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all text-slate-800 dark:text-slate-100 placeholder-slate-400"
+                className="w-full pl-10 pr-4 py-2 text-xs font-mono clay-inset rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-cyan-500 font-mono cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-500 hover:text-cyan-600 font-mono cursor-pointer font-bold"
                 >
                   CLEAR
                 </button>
@@ -182,15 +182,15 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Command Vault Tab */}
           <button
             onClick={() => setActiveTab('vault')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
               activeTab === 'vault'
-                ? 'clay-btn text-cyan-600 dark:text-cyan-300 font-bold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'clay-btn text-cyan-700 dark:text-cyan-300 font-black shadow-sm'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
             }`}
           >
-            <Shield className="w-4 h-4 text-cyan-500" />
+            <Shield className="w-4 h-4 text-cyan-600 dark:text-cyan-500" />
             <span>Command Vault</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-700 dark:text-cyan-400 font-bold">
               {totalCommandsCount}
             </span>
           </button>
@@ -198,15 +198,15 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Kali Setup Guide Tab (Shortcut Nav Key for Win & Mac) */}
           <button
             onClick={() => setActiveTab('setup')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
               activeTab === 'setup'
-                ? 'clay-btn text-cyan-600 dark:text-cyan-300 font-bold shadow-md shadow-cyan-500/15'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'clay-btn text-cyan-700 dark:text-cyan-300 font-black shadow-sm'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
             }`}
           >
-            <Laptop className="w-4 h-4 text-cyan-500" />
+            <Laptop className="w-4 h-4 text-cyan-600 dark:text-cyan-500" />
             <span>Setup Guide</span>
-            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+            <span className="px-1.5 py-0.2 rounded-full text-[9px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
               WIN + MAC
             </span>
           </button>
@@ -214,13 +214,13 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Kali Terminal Tab */}
           <button
             onClick={() => setActiveTab('terminal')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
               activeTab === 'terminal'
-                ? 'clay-btn text-emerald-600 dark:text-emerald-300 font-bold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'clay-btn text-emerald-700 dark:text-emerald-300 font-black shadow-sm'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
             }`}
           >
-            <Terminal className="w-4 h-4 text-emerald-500" />
+            <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
             <span>Kali Terminal</span>
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -231,15 +231,15 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Command Builder Tab */}
           <button
             onClick={() => setActiveTab('builder')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
               activeTab === 'builder'
-                ? 'clay-btn text-purple-600 dark:text-purple-300 font-bold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'clay-btn text-purple-700 dark:text-purple-300 font-black shadow-sm'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
             }`}
           >
-            <Wrench className="w-4 h-4 text-purple-500" />
+            <Wrench className="w-4 h-4 text-purple-600 dark:text-purple-500" />
             <span>Command Builder</span>
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-300 font-bold">
+            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 font-bold">
               3D BUILD
             </span>
           </button>
@@ -247,13 +247,13 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Cyber Quiz Tab */}
           <button
             onClick={() => setActiveTab('quiz')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
               activeTab === 'quiz'
-                ? 'clay-btn text-amber-600 dark:text-amber-300 font-bold'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'clay-btn text-amber-700 dark:text-amber-300 font-black shadow-sm'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
             }`}
           >
-            <HelpCircle className="w-4 h-4 text-amber-500" />
+            <HelpCircle className="w-4 h-4 text-amber-600 dark:text-amber-500" />
             <span>Cyber Quiz</span>
             <Sparkles className="w-3 h-3 text-amber-500" />
           </button>
@@ -261,10 +261,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Latest Tools & Releases Tab (Highlighted with Flame) */}
           <button
             onClick={() => setActiveTab('releases')}
-            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-xl font-semibold transition-all cursor-pointer ${
               activeTab === 'releases'
-                ? 'clay-btn text-rose-600 dark:text-rose-300 font-bold shadow-md shadow-rose-500/10'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                ? 'clay-btn text-rose-700 dark:text-rose-300 font-black shadow-sm'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
             }`}
           >
             <Flame className="w-4 h-4 text-rose-500" />

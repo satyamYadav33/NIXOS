@@ -122,8 +122,8 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
           onClick={() => setSelectedCategory('all')}
           className={`clay-btn flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold shrink-0 transition-all cursor-pointer ${
             selectedCategory === 'all'
-              ? 'clay-btn-primary font-bold shadow-lg'
-              : 'text-slate-600 dark:text-slate-300'
+              ? 'clay-btn-primary font-bold shadow-sm'
+              : 'text-slate-800 dark:text-slate-200 hover:text-slate-950'
           }`}
         >
           <Layers className="w-3.5 h-3.5" />
@@ -139,14 +139,14 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`clay-btn flex items-center space-x-1.5 px-3.5 py-2 text-xs font-medium shrink-0 transition-all cursor-pointer ${
+              className={`clay-btn flex items-center space-x-1.5 px-3.5 py-2 text-xs font-semibold shrink-0 transition-all cursor-pointer ${
                 isSelected
                   ? 'clay-btn-primary font-bold'
-                  : 'text-slate-600 dark:text-slate-300'
+                  : 'text-slate-800 dark:text-slate-200 hover:text-slate-950'
               }`}
             >
               <span>{cat.shortName}</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full clay-badge font-mono font-bold">
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full clay-badge font-mono font-bold text-slate-800 dark:text-slate-200">
                 {count}
               </span>
             </button>
@@ -157,8 +157,8 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
       {/* Learning Curve Level Selector Bar */}
       <div className="clay-card p-3 sm:p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <div className="flex items-center space-x-2">
-          <GraduationCap className="w-4 h-4 text-cyan-500 shrink-0" />
-          <span className="text-xs font-bold font-mono text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+          <GraduationCap className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+          <span className="text-xs font-bold font-mono text-slate-900 dark:text-slate-100 uppercase tracking-wider">
             Learning Curve:
           </span>
         </div>
@@ -169,7 +169,7 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
             className={`clay-btn px-3 py-1.5 text-xs font-semibold rounded-xl transition-all cursor-pointer ${
               selectedLevel === 'all'
                 ? 'clay-btn-primary'
-                : 'text-slate-600 dark:text-slate-400'
+                : 'text-slate-800 dark:text-slate-200'
             }`}
           >
             All Levels
@@ -177,10 +177,10 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
 
           <button
             onClick={() => setSelectedLevel('Beginner')}
-            className={`clay-btn px-3 py-1.5 text-xs font-semibold rounded-xl transition-all cursor-pointer ${
+            className={`clay-btn px-3 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               selectedLevel === 'Beginner'
-                ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-2 border-emerald-500 font-bold'
-                : 'text-slate-600 dark:text-slate-400'
+                ? 'bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-2 border-emerald-500'
+                : 'text-slate-800 dark:text-slate-200'
             }`}
           >
             🌱 Lvl 1: Core Fundamentals
@@ -188,10 +188,10 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
 
           <button
             onClick={() => setSelectedLevel('Intermediate')}
-            className={`clay-btn px-3 py-1.5 text-xs font-semibold rounded-xl transition-all cursor-pointer ${
+            className={`clay-btn px-3 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               selectedLevel === 'Intermediate'
-                ? 'bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border-2 border-cyan-500 font-bold'
-                : 'text-slate-600 dark:text-slate-400'
+                ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border-2 border-cyan-500'
+                : 'text-slate-800 dark:text-slate-200'
             }`}
           >
             ⚡ Lvl 2: Tactical Assessment
@@ -199,10 +199,10 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
 
           <button
             onClick={() => setSelectedLevel('Advanced')}
-            className={`clay-btn px-3 py-1.5 text-xs font-semibold rounded-xl transition-all cursor-pointer ${
+            className={`clay-btn px-3 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               selectedLevel === 'Advanced'
-                ? 'bg-purple-500/20 text-purple-700 dark:text-purple-300 border-2 border-purple-500 font-bold'
-                : 'text-slate-600 dark:text-slate-400'
+                ? 'bg-purple-500/20 text-purple-800 dark:text-purple-300 border-2 border-purple-500'
+                : 'text-slate-800 dark:text-slate-200'
             }`}
           >
             🔥 Lvl 3: Red Team Operator
@@ -213,12 +213,12 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
       {/* Beginner Helpful Guidance Callout */}
       {selectedLevel === 'Beginner' && (
         <div className="clay-card p-4 sm:p-5 flex items-start space-x-3 border-l-4 border-emerald-500 animate-in fade-in duration-200">
-          <Sparkles className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+          <Sparkles className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
           <div className="text-xs space-y-1">
-            <h4 className="font-bold text-emerald-700 dark:text-emerald-300 font-mono">
+            <h4 className="font-bold text-emerald-800 dark:text-emerald-300 font-mono">
               Beginner Learning Roadmap Tip
             </h4>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+            <p className="text-slate-800 dark:text-slate-200 leading-relaxed font-sans font-medium">
               Welcome to Kali Linux! Start by practicing commands in the <strong>OSINT & Reconnaissance</strong> and <strong>Port Scanning</strong> categories. These tools allow you to learn command flags, DNS architecture, and network ports without risking unintended harm. Click "Beginner Mental Model" on any card below to see what happens under the hood!
             </p>
           </div>
@@ -232,22 +232,22 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
         <div className="flex items-center space-x-2.5 w-full sm:w-auto">
           {/* Mobile Search input */}
           <div className="relative flex-1 sm:hidden">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search tools, flags..."
-              className="w-full pl-9 pr-3 py-2 text-xs font-mono clay-inset rounded-xl text-slate-800 dark:text-slate-100 placeholder-slate-400"
+              className="w-full pl-9 pr-3 py-2 text-xs font-mono clay-inset rounded-xl text-slate-900 dark:text-slate-100 placeholder:text-slate-500 font-medium"
             />
           </div>
 
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className={`clay-btn flex items-center space-x-2 px-3.5 py-2 text-xs font-medium rounded-xl transition-all cursor-pointer ${
+            className={`clay-btn flex items-center space-x-2 px-3.5 py-2 text-xs font-semibold rounded-xl transition-all cursor-pointer ${
               showFilters || hasActiveFilters
                 ? 'clay-btn-primary font-bold'
-                : 'text-slate-600 dark:text-slate-300'
+                : 'text-slate-800 dark:text-slate-200'
             }`}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
@@ -257,24 +257,24 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
             )}
           </button>
 
-          <span className="text-xs text-slate-500 font-mono hidden md:inline">
-            Showing <strong className="text-slate-900 dark:text-slate-100 font-bold">{filteredCommands.length}</strong> of {commands.length} commands
+          <span className="text-xs text-slate-700 dark:text-slate-300 font-mono hidden md:inline">
+            Showing <strong className="text-slate-950 dark:text-slate-100 font-bold">{filteredCommands.length}</strong> of {commands.length} commands
           </span>
         </div>
 
         {/* Right: Quick Noise Filter Badges (Clay Pills) */}
         <div className="flex items-center space-x-1.5 overflow-x-auto text-xs no-scrollbar self-start sm:self-center">
-          <span className="text-[11px] text-slate-400 uppercase tracking-wider font-bold mr-1 hidden sm:inline font-mono">
+          <span className="text-[11px] text-slate-600 dark:text-slate-400 uppercase tracking-wider font-bold mr-1 hidden sm:inline font-mono">
             Noise:
           </span>
           {(['all', 'stealth', 'low', 'moderate', 'noisy'] as const).map((noise) => (
             <button
               key={noise}
               onClick={() => setSelectedNoise(noise)}
-              className={`clay-btn px-3 py-1 text-[11px] font-semibold capitalize transition-all cursor-pointer ${
+              className={`clay-btn px-3 py-1 text-[11px] font-bold capitalize transition-all cursor-pointer ${
                 selectedNoise === noise
-                  ? 'text-cyan-600 dark:text-cyan-400 font-bold'
-                  : 'text-slate-500 dark:text-slate-400'
+                  ? 'text-cyan-700 dark:text-cyan-400 font-black'
+                  : 'text-slate-700 dark:text-slate-300'
               }`}
             >
               {noise}

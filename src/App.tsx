@@ -156,7 +156,7 @@ export function App() {
                   v2024.x
                 </span>
               </h2>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+              <p className="text-[11px] text-slate-700 dark:text-slate-300 mt-0.5">
                 Volumetric Claymorphic Hub covering Reconnaissance, Exploitation, Privilege Escalation, and Defense Evasion.
               </p>
             </div>
@@ -166,16 +166,16 @@ export function App() {
             {/* Quick Link to Setup Guide */}
             <button
               onClick={() => setActiveTab('setup')}
-              className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-cyan-600 dark:text-cyan-400 font-bold cursor-pointer"
+              className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-cyan-700 dark:text-cyan-300 font-bold cursor-pointer"
             >
-              <Laptop className="w-3.5 h-3.5 text-cyan-500" />
+              <Laptop className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
               <span>Win/Mac Setup</span>
             </button>
 
             {/* Quick Link to Releases */}
             <button
               onClick={() => setActiveTab('releases')}
-              className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-rose-600 dark:text-rose-400 font-bold cursor-pointer"
+              className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-rose-700 dark:text-rose-300 font-bold cursor-pointer"
             >
               <Flame className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
               <span>Latest Tools</span>
@@ -183,12 +183,12 @@ export function App() {
             </button>
 
             <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">|</span>
-            <span className="clay-badge px-3 py-1 text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+            <span className="clay-badge px-3 py-1 text-slate-800 dark:text-slate-200 font-bold flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               {COMMANDS_DATA.length}+ Commands
             </span>
             <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">|</span>
-            <span className="clay-badge px-3 py-1 text-slate-700 dark:text-slate-300">
+            <span className="clay-badge px-3 py-1 text-slate-800 dark:text-slate-200 font-bold">
               9 Tactical Domains
             </span>
           </div>
@@ -241,7 +241,7 @@ export function App() {
       </main>
 
       {/* Footer in Claymorphism */}
-      <footer className="mt-16 px-4 py-8 text-xs text-slate-500 dark:text-slate-400">
+      <footer className="mt-16 px-4 py-8 text-xs text-slate-600 dark:text-slate-400">
         <div className="max-w-7xl mx-auto clay-card p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
           
           <div className="flex items-center space-x-2.5">
@@ -250,10 +250,10 @@ export function App() {
             </div>
             <span className="font-bold text-slate-900 dark:text-slate-100 font-mono">KaliVault</span>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span>Tactical Claymorphic Cybersecurity Operations Suite</span>
+            <span className="text-slate-700 dark:text-slate-300 font-medium">Tactical Claymorphic Cybersecurity Operations Suite</span>
           </div>
 
-          <div className="text-center text-[11px] text-slate-500 dark:text-slate-400 max-w-md">
+          <div className="text-center text-[11px] text-slate-600 dark:text-slate-400 max-w-md">
             ⚠️ Disclaimer: All commands and tools documented are strictly for authorized penetration testing, security auditing, and defensive hardening.
           </div>
 

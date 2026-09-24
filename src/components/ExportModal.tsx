@@ -108,14 +108,14 @@ export const ExportModal: React.FC<ExportModalProps> = ({
               <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                 Export Kali Tactical Sheet
               </h3>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+              <p className="text-[11px] text-slate-600 dark:text-slate-300 font-medium">
                 Generate offline markdown or text field reference
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="clay-btn p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 cursor-pointer"
+            className="clay-btn p-2 rounded-xl text-slate-700 hover:text-slate-950 dark:hover:text-white cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -128,7 +128,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
             
             {/* Scope */}
             <div>
-              <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2 font-mono">
+              <label className="block text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
                 Export Scope
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -137,7 +137,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                   className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportScope === 'all'
                       ? 'clay-btn-primary'
-                      : 'clay-btn text-slate-600 dark:text-slate-300'
+                      : 'clay-btn text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
                   }`}
                 >
                   All ({commands.length})
@@ -147,7 +147,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                   className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportScope === 'bookmarks'
                       ? 'clay-btn-primary'
-                      : 'clay-btn text-slate-600 dark:text-slate-300'
+                      : 'clay-btn text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
                   }`}
                 >
                   Bookmarks ({bookmarkedIds.size})
@@ -157,7 +157,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
             {/* Format */}
             <div>
-              <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2 font-mono">
+              <label className="block text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
                 Format
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -166,7 +166,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                   className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportFormat === 'markdown'
                       ? 'clay-btn-primary'
-                      : 'clay-btn text-slate-600 dark:text-slate-300'
+                      : 'clay-btn text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
                   }`}
                 >
                   Markdown (.md)
@@ -176,7 +176,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
                   className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     exportFormat === 'text'
                       ? 'clay-btn-primary'
-                      : 'clay-btn text-slate-600 dark:text-slate-300'
+                      : 'clay-btn text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
                   }`}
                 >
                   Plain Text (.txt)
@@ -189,10 +189,10 @@ export const ExportModal: React.FC<ExportModalProps> = ({
           {/* Preview Box */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider font-mono">
+              <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono">
                 Preview ({targetCommands.length} commands)
               </label>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono font-medium">
                 Ready to compile
               </span>
             </div>

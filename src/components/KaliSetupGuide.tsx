@@ -115,7 +115,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
             <h1 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 font-mono tracking-tight">
               Interactive Kali Linux Setup Station
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
               Follow step-by-step verified procedures to install, tune, and run an authentic Kali Linux security environment smoothly on your Windows or Mac machine.
             </p>
           </div>
@@ -141,13 +141,13 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400">
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 font-medium">
                 {isFullyCompleted ? '🎉 Ready for combat!' : 'Complete all steps below'}
               </span>
               {completedCount > 0 && (
                 <button
                   onClick={handleResetProgress}
-                  className="text-[10px] font-mono text-slate-400 hover:text-rose-500 flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-[10px] font-mono text-slate-500 hover:text-rose-500 flex items-center gap-1 transition-colors cursor-pointer"
                   title="Reset method progress"
                 >
                   <RotateCcw className="w-3 h-3" />
@@ -163,32 +163,32 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
           <div className="clay-badge p-2.5 flex items-center space-x-2.5">
             <Cpu className="w-4 h-4 text-cyan-500 shrink-0" />
             <div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-mono">CPU CORES</span>
-              <span className="font-bold text-slate-800 dark:text-slate-200">{currentMethod.specs.cpuCores}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-semibold">CPU CORES</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100">{currentMethod.specs.cpuCores}</span>
             </div>
           </div>
 
           <div className="clay-badge p-2.5 flex items-center space-x-2.5">
             <Zap className="w-4 h-4 text-amber-500 shrink-0" />
             <div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-mono">REC. RAM</span>
-              <span className="font-bold text-slate-800 dark:text-slate-200">{currentMethod.specs.recRam}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-semibold">REC. RAM</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100">{currentMethod.specs.recRam}</span>
             </div>
           </div>
 
           <div className="clay-badge p-2.5 flex items-center space-x-2.5">
             <HardDrive className="w-4 h-4 text-purple-500 shrink-0" />
             <div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-mono">FREE STORAGE</span>
-              <span className="font-bold text-slate-800 dark:text-slate-200">{currentMethod.specs.diskSpace}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-semibold">FREE STORAGE</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100">{currentMethod.specs.diskSpace}</span>
             </div>
           </div>
 
           <div className="clay-badge p-2.5 flex items-center space-x-2.5">
             <Sparkles className="w-4 h-4 text-emerald-500 shrink-0" />
             <div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 block font-mono">SPEED CLASS</span>
-              <span className="font-bold text-slate-800 dark:text-slate-200 truncate">{currentMethod.performance}</span>
+              <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-semibold">SPEED CLASS</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100 truncate">{currentMethod.performance}</span>
             </div>
           </div>
         </div>
@@ -205,7 +205,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
               className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center space-x-2 transition-all cursor-pointer ${
                 activeOS === 'windows'
                   ? 'clay-btn-primary shadow-lg'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
               }`}
             >
               <Laptop className="w-4 h-4" />
@@ -217,7 +217,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
               className={`flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center space-x-2 transition-all cursor-pointer ${
                 activeOS === 'mac'
                   ? 'clay-btn-primary shadow-lg'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
               }`}
             >
               <Monitor className="w-4 h-4" />
@@ -251,7 +251,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                     WSL2 + Win-KeX
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 font-medium">
                     Zero VM lag, native GUI desktop, shared audio & copy-paste with Windows.
                   </p>
                 </div>
@@ -281,7 +281,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                     VirtualBox / VMware
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 font-medium">
                     Pre-built official OVA image with instant snapshot recovery and full network isolation.
                   </p>
                 </div>
@@ -311,7 +311,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                     Live USB Persistence
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 font-medium">
                     Zero host footprint with LUKS-encrypted persistence for on-the-go assessments.
                   </p>
                 </div>
@@ -343,7 +343,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                     UTM for Mac (ARM64)
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 font-medium">
                     Native Apple Hypervisor virtualization with crisp Retina display scaling and zero battery drain.
                   </p>
                 </div>
@@ -373,7 +373,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                     VMware Fusion Pro
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 font-medium">
                     Official VMware pre-built ARM64 appliance with 3D Metal acceleration. Free for personal use!
                   </p>
                 </div>
@@ -403,7 +403,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                     VirtualBox for Intel Mac
                   </h3>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 font-medium">
                     Standard 64-bit AMD64 virtual machine image for older Intel Core i5/i7/i9 Apple computers.
                   </p>
                 </div>
@@ -423,7 +423,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
           <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
             {currentMethod.name}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-0.5">
             {currentMethod.tagline}
           </p>
         </div>
@@ -435,7 +435,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
               <CheckCircle2 className="w-4 h-4" />
               Key Advantages
             </span>
-            <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+            <ul className="space-y-1.5 text-xs text-slate-800 dark:text-slate-200 font-medium">
               {currentMethod.pros.map((p, i) => (
                 <li key={i} className="flex items-start space-x-2">
                   <span className="text-emerald-500 font-bold">•</span>
@@ -451,7 +451,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
               <AlertTriangle className="w-4 h-4" />
               Trade-offs & Constraints
             </span>
-            <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+            <ul className="space-y-1.5 text-xs text-slate-800 dark:text-slate-200 font-medium">
               {currentMethod.cons.map((c, i) => (
                 <li key={i} className="flex items-start space-x-2">
                   <span className="text-amber-500 font-bold">•</span>
@@ -470,11 +470,11 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
             <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
               Deployment Roadmap ({currentMethod.steps.length} Steps)
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">
               Follow sequentially and tick the checkboxes as you complete each task
             </p>
           </div>
-          <span className="clay-badge text-xs font-mono font-bold text-slate-600 dark:text-slate-300 px-3 py-1">
+          <span className="clay-badge text-xs font-mono font-bold text-slate-800 dark:text-slate-200 px-3 py-1">
             ESTIMATED: ~15-20 MINS
           </span>
         </div>
@@ -499,7 +499,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                       className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all cursor-pointer shrink-0 mt-0.5 ${
                         isDone 
                           ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30' 
-                          : 'clay-inset text-slate-400 hover:text-cyan-500'
+                          : 'clay-inset text-slate-600 dark:text-slate-400 hover:text-cyan-500'
                       }`}
                       title={isDone ? 'Mark as Incomplete' : 'Mark as Completed'}
                     >
@@ -524,7 +524,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                       }`}>
                         {step.title}
                       </h3>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                      <p className="text-xs text-slate-700 dark:text-slate-300 mt-0.5">
                         {step.summary}
                       </p>
                     </div>
@@ -532,7 +532,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
 
                   <button
                     onClick={() => toggleStepCompleted(step.id)}
-                    className="clay-btn text-[11px] font-mono px-3 py-1.5 hidden sm:block shrink-0 cursor-pointer"
+                    className="clay-btn text-[11px] font-mono px-3 py-1.5 hidden sm:block shrink-0 cursor-pointer text-slate-800 dark:text-slate-200 font-semibold"
                   >
                     {isDone ? 'Completed ✓' : 'Mark Done'}
                   </button>
@@ -540,10 +540,10 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
 
                 {/* Instructions List */}
                 <div className="clay-inset p-3.5 sm:p-4 rounded-xl space-y-2">
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono block">
+                  <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono block">
                     Action Items:
                   </span>
-                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-sans">
+                  <ul className="space-y-1.5 text-xs text-slate-800 dark:text-slate-200 font-sans font-medium">
                     {step.instructions.map((inst, idx) => (
                       <li key={idx} className="flex items-start space-x-2.5">
                         <span className="w-4 h-4 rounded-full bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-[10px] font-mono shrink-0 mt-0.5 font-bold">
@@ -559,16 +559,16 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                 {step.commandToRun && (
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-[11px] font-mono">
-                      <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1 font-bold">
+                      <span className="text-slate-700 dark:text-slate-300 flex items-center gap-1 font-bold">
                         <Terminal className="w-3.5 h-3.5 text-emerald-500" />
                         Execute in Terminal:
                       </span>
-                      <span className="text-[10px] text-slate-400">Click icon to copy</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Click icon to copy</span>
                     </div>
 
                     <div className="clay-inset p-3 rounded-xl flex items-center justify-between gap-3 font-mono text-xs">
                       <div className="overflow-x-auto text-emerald-600 dark:text-emerald-400 font-semibold select-all py-0.5">
-                        <span className="text-slate-400 select-none mr-2 font-normal">$</span>
+                        <span className="text-slate-500 dark:text-slate-400 select-none mr-2 font-normal">$</span>
                         {step.commandToRun}
                       </div>
 
@@ -576,7 +576,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                         <button
                           onClick={() => handleCopy(step.commandToRun!, step.id)}
                           title="Copy command"
-                          className="clay-btn p-2 text-slate-600 dark:text-slate-300 hover:text-emerald-500 cursor-pointer"
+                          className="clay-btn p-2 text-slate-700 dark:text-slate-300 hover:text-emerald-500 cursor-pointer"
                         >
                           {copiedCmd === step.id ? (
                             <Check className="w-3.5 h-3.5 text-emerald-500" />
@@ -600,7 +600,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                 {/* Simulated Output Preview */}
                 {step.outputPreview && (
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono text-slate-400 font-bold block uppercase tracking-wider">
+                    <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400 font-bold block uppercase tracking-wider">
                       Expected Terminal Response:
                     </span>
                     <div className="p-3 bg-[#060911] text-emerald-400 font-mono text-[11px] rounded-xl overflow-x-auto max-h-40 scanlines border border-slate-800">
@@ -649,7 +649,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono">
                 🎉 Kali Linux Instance Fully Deployed!
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto mt-1">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-w-lg mx-auto mt-1">
                 You have successfully configured, initialized, and verified your tactical Kali environment. You are now equipped to run real offensive tests and security audits.
               </p>
             </div>
@@ -685,7 +685,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
             <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
               Diagnostic & Troubleshooting Matrix
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-600 dark:text-slate-300">
               Instant battle-tested fixes for the 6 most common beginner installation blockers
             </p>
           </div>
@@ -705,16 +705,16 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                   <div className="flex items-center space-x-3">
                     <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 font-mono">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 font-mono">
                         {item.issue}
                       </h4>
-                      <span className="text-[10px] text-slate-400 uppercase font-mono tracking-wider">
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-mono tracking-wider font-medium">
                         Platform: {item.platform.toUpperCase()}
                       </span>
                     </div>
                   </div>
 
-                  {isOpen ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                  {isOpen ? <ChevronUp className="w-4 h-4 text-slate-600 dark:text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-600 dark:text-slate-400" />}
                 </button>
 
                 {isOpen && (
@@ -723,7 +723,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                       <span className="font-bold text-rose-600 dark:text-rose-400 text-[10px] uppercase font-mono block">
                         Root Cause:
                       </span>
-                      <p className="text-slate-700 dark:text-slate-300 mt-0.5 leading-relaxed">
+                      <p className="text-slate-800 dark:text-slate-200 mt-0.5 leading-relaxed">
                         {item.rootCause}
                       </p>
                     </div>
@@ -732,7 +732,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                       <span className="font-bold text-cyan-600 dark:text-cyan-400 text-[10px] uppercase font-mono block">
                         Solution Steps:
                       </span>
-                      <ul className="space-y-1 text-slate-600 dark:text-slate-300">
+                      <ul className="space-y-1 text-slate-700 dark:text-slate-300 font-medium">
                         {item.solutionSteps.map((step, idx) => (
                           <li key={idx} className="flex items-start space-x-2">
                             <span className="text-cyan-500 font-bold">•</span>
@@ -744,14 +744,14 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
 
                     {item.fixCommand && (
                       <div className="pt-2">
-                        <span className="text-[10px] font-mono text-slate-400 block mb-1 font-bold">
+                        <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400 block mb-1 font-bold">
                           Quick 1-Line Fix:
                         </span>
                         <div className="clay-card p-2.5 rounded-xl flex items-center justify-between gap-2 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-bold">
                           <code className="overflow-x-auto select-all">{item.fixCommand}</code>
                           <button
                             onClick={() => handleCopy(item.fixCommand!, item.id)}
-                            className="clay-btn p-1.5 text-slate-500 hover:text-emerald-500 shrink-0 cursor-pointer"
+                            className="clay-btn p-1.5 text-slate-700 dark:text-slate-300 hover:text-emerald-500 shrink-0 cursor-pointer"
                             title="Copy fix command"
                           >
                             {copiedCmd === item.id ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
@@ -777,7 +777,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
             <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
               Essential Post-Install Tuning Checklist
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-600 dark:text-slate-300">
               Top 5 commands to run immediately inside your fresh Kali Linux instance
             </p>
           </div>
@@ -799,7 +799,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                     {task.importance}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                <p className="text-[11px] text-slate-600 dark:text-slate-300 font-medium">
                   {task.desc}
                 </p>
               </div>
@@ -810,7 +810,7 @@ export const KaliSetupGuide: React.FC<KaliSetupGuideProps> = ({
                 </code>
                 <button
                   onClick={() => handleCopy(task.command, task.id)}
-                  className="clay-btn p-1.5 text-slate-500 hover:text-emerald-500 shrink-0 cursor-pointer"
+                  className="clay-btn p-1.5 text-slate-700 dark:text-slate-300 hover:text-emerald-500 shrink-0 cursor-pointer"
                   title="Copy command"
                 >
                   {copiedCmd === task.id ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}

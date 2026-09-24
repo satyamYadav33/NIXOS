@@ -233,14 +233,14 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
                       )}
                     </div>
 
-                    <h2 className="text-xl font-black text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
+                    <h2 className="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight flex items-center gap-2">
                       {tool.name}
-                      <code className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold px-2 py-0.5 rounded-lg clay-inset">
+                      <code className="text-xs font-mono text-cyan-700 dark:text-cyan-400 font-bold px-2 py-0.5 rounded-lg clay-inset">
                         {tool.packageName}
                       </code>
                     </h2>
 
-                    <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">
+                    <p className="text-xs text-slate-700 dark:text-slate-400 font-semibold mt-1">
                       {tool.category}
                     </p>
                   </div>
@@ -250,7 +250,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
                     target="_blank"
                     rel="noreferrer"
                     title="View Documentation & Repo"
-                    className="clay-btn p-2 text-slate-500 dark:text-slate-400 hover:text-cyan-500 transition-colors shrink-0"
+                    className="clay-btn p-2 text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors shrink-0"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>
@@ -258,10 +258,10 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
 
                 {/* Replaced Tool Callout (if any) */}
                 {tool.replacedTool && (
-                  <div className="clay-inset p-3 text-xs text-amber-700 dark:text-amber-300 flex items-center space-x-2">
-                    <RefreshCw className="w-4 h-4 text-amber-500 shrink-0" />
+                  <div className="clay-inset p-3 text-xs text-amber-800 dark:text-amber-300 flex items-center space-x-2 font-medium">
+                    <RefreshCw className="w-4 h-4 text-amber-600 shrink-0" />
                     <span>
-                      <strong>Successor Alert:</strong> Replaces deprecated{' '}
+                      <strong className="font-bold">Successor Alert:</strong> Replaces deprecated{' '}
                       <code className="font-mono font-bold underline">{tool.replacedTool}</code>.
                     </span>
                   </div>
@@ -269,35 +269,35 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
 
                 {/* Headline & Description */}
                 <div>
-                  <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1">
                     {tool.headline}
                   </h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-800 dark:text-slate-300 leading-relaxed font-normal">
                     {tool.description}
                   </p>
                 </div>
 
                 {/* Why Cybersecurity Experts Care */}
                 <div className="clay-inset p-3.5 space-y-1.5">
-                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 flex items-center gap-1.5">
-                    <ShieldAlert className="w-3.5 h-3.5 text-cyan-500" />
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 flex items-center gap-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                     Why Pentesters & Analysts Care:
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+                  <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-sans font-medium">
                     {tool.whyItMatters}
                   </p>
                 </div>
 
                 {/* Key Features List */}
                 <div className="space-y-1.5">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">
                     Key Highlights & Capabilities:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                     {tool.keyFeatures.map((feat, i) => (
-                      <div key={i} className="flex items-start space-x-2 text-xs text-slate-700 dark:text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                        <span className="text-[11px] leading-snug">{feat}</span>
+                      <div key={i} className="flex items-start space-x-2 text-xs text-slate-800 dark:text-slate-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span className="text-[11px] leading-snug font-medium">{feat}</span>
                       </div>
                     ))}
                   </div>
@@ -310,20 +310,20 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
                 
                 {/* Install Block */}
                 <div className="flex items-center justify-between gap-2 p-2.5 clay-inset font-mono text-xs">
-                  <div className="overflow-x-auto text-emerald-600 dark:text-emerald-400 font-semibold select-all py-0.5">
-                    <span className="text-slate-400 select-none mr-2 font-normal">$</span>
+                  <div className="overflow-x-auto text-emerald-700 dark:text-emerald-400 font-bold select-all py-0.5">
+                    <span className="text-slate-500 dark:text-slate-400 select-none mr-2 font-normal">$</span>
                     {tool.installCmd}
                   </div>
                   <button
                     onClick={() => handleCopyInstall(tool.id, tool.installCmd)}
                     title="Copy APT Install Command"
-                    className={`clay-btn p-2 text-xs transition-all shrink-0 ${
+                    className={`clay-btn p-2 text-xs transition-all shrink-0 cursor-pointer ${
                       isCopied
-                        ? 'text-emerald-600 dark:text-emerald-400 font-bold'
-                        : 'text-slate-600 dark:text-slate-300'
+                        ? 'text-emerald-700 dark:text-emerald-400 font-bold'
+                        : 'text-slate-700 dark:text-slate-300'
                     }`}
                   >
-                    {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                    {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
 
@@ -331,7 +331,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
                 {tool.demoCommand && (
                   <button
                     onClick={() => onRunInTerminal(tool.demoCommand!)}
-                    className="clay-btn w-full flex items-center justify-center space-x-2 py-2.5 px-4 text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 text-xs font-bold transition-all"
+                    className="clay-btn w-full flex items-center justify-center space-x-2 py-2.5 px-4 text-cyan-700 dark:text-cyan-300 hover:text-cyan-800 dark:hover:text-cyan-200 text-xs font-bold transition-all cursor-pointer"
                   >
                     <Terminal className="w-3.5 h-3.5" />
                     <span>Run Demo in Kali Terminal Simulator</span>
