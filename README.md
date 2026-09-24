@@ -1,4 +1,4 @@
-# 🐉 KaliVault — Cybersecurity Command Hub & Terminal Simulator
+# 🐉 KaliVault — Tactical Kali Linux Cybersecurity Hub & Terminal Simulator
 
 <div align="center">
 
@@ -6,12 +6,13 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178c6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8.3-646cff?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Design](https://img.shields.io/badge/UI_Aesthetic-Claymorphism-8b5cf6?style=for-the-badge)
 ![Vercel](https://img.shields.io/badge/Deploy_on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)
 
-**An interactive, battle-tested Kali Linux reference platform for Penetration Testers, Red Teamers, and SOC Analysts.**
+**A tactile Claymorphic, battle-tested Kali Linux reference platform for Penetration Testers, Red Teamers, and SOC Analysts.**
 
-[Live Demo](#-deploying-to-vercel) • [Features](#-key-features) • [Installation](#-getting-started) • [Deployment](#-deploying-to-vercel) • [Disclaimer](#%EF%B8%8F-legal--ethical-disclaimer)
+[Features](#-key-features) • [Claymorphism & Motion](#-claymorphism--motion-experience) • [Installation](#-getting-started) • [Deployment](#-deploying-to-vercel) • [Disclaimer](#%EF%B8%8F-legal--ethical-disclaimer)
 
 </div>
 
@@ -19,7 +20,28 @@
 
 ## 🌟 Overview
 
-**KaliVault** is a web-based cybersecurity command intelligence hub and interactive Kali Linux terminal simulator. It bridges the gap between static cheat-sheets and practical tactical application, cataloging **45+ essential commands** across 9 offensive and defensive security domains with flag-by-flag breakdowns, real-world engagement contexts, and authentic simulated outputs.
+**KaliVault** is a web-based cybersecurity command intelligence hub and interactive Kali Linux terminal simulator built entirely in a high-fidelity **Claymorphism** design system. It bridges the gap between static cheat-sheets and practical tactical tradecraft, cataloging **45+ essential offensive and defensive security commands** across 9 domains with flag-by-flag breakdowns, MITRE ATT&CK mapping, and authentic simulated outputs.
+
+---
+
+## 🎨 Claymorphism & Motion Experience
+
+### 🫧 1. Volumetric Tactile Claymorphism
+- **Dual Outer Shadows & Dual Inset Highlights**: Every card, button, badge, input, and drawer is sculpted with soft, pillowy, volumetric 3D clay depth.
+- **Both Light & Dark Modes**: Carefully calibrated light clay palettes (`#e8ecf3` base, `#eff3f9` cards) and dark cyber clay palettes (`#0a0f1d` base, `#11182c` cards) that maintain rich tangible tactile volume.
+- **Micro-Interactions**: Tactile button depressions (`active:translate-y-0.5`), floating hover elevations, and embossed inset terminal screen wells.
+
+### 🌊 2. Fluid Theme Shockwave Transition
+- Switching between Dark and Light mode is **never abrupt**.
+- Clicking the tactile sun/moon slider pill triggers an **expanding circular clay shockwave ripple** originating exactly from the toggle's physical coordinates `(x, y)`.
+- The morphing shockwave washes across the viewport with glowing chromatic edges before cleanly dissolving into the new theme.
+
+### 🐉 3. 3-Second Kali Dragon Logo Splash Screen
+- Greets visitors upon initial load and page refresh with a **3-second cinematic lazy-loading intro**.
+- **Random Corner Trajectory**: On every launch, the Kali dragon emblem spawns from a randomized screen corner (`top-left`, `top-right`, `bottom-left`, or `bottom-right`).
+- **Swoop & Hover**: Sweeps into the exact center of the screen with a customized spring easing curve (`cubic-bezier(0.16, 1, 0.3, 1)`), pulses with glowing clay typography, and gently expands.
+- **Fullscreen Blast**: Rapidly scales to 28x-32x full-screen proportions and smoothly blends out into the background, seamlessly unveiling the application.
+- Includes a replay button in the navbar and an instant <kbd>ESC</kbd> skip mechanism.
 
 ---
 
@@ -52,7 +74,7 @@
   - 🔬 **Digital Forensics & Reverse Engineering** (`binwalk`, `volatility`, `strings`, `exiftool`, `radare2`)
   - 🛠️ **Pivoting & Network Traffic** (`tcpdump`, `tshark`, `netcat / nc`, `socat`)
 
-### 📋 2. Deep Technical Command Cards
+### 📋 3. Deep Technical Command Cards
 - **Exact Syntax & Real-World Examples**: Copy-ready commands with realistic parameters.
 - **Flag-by-Flag Explanations**: Deep breakdown of every argument (`-sC`, `-sV`, `-p-`, `-T4`, `--batch`, etc.).
 - **OpSec Noise Rating Badges**: `Stealth / Passive`, `Low Noise`, `Moderate Noise`, and `High Noise / Active`.
@@ -60,13 +82,13 @@
 - **Simulated Terminal Output**: Expandable authentic outputs demonstrating expected tool behavior.
 - **One-Click Copy & Bookmarks**: Save favorite commands with local persistence.
 
-### 💻 3. Interactive Kali Terminal Simulator (`kali@kali:~$`)
-- Retro-modern Kali Linux terminal interface with scanlines and zsh prompt.
+### 💻 4. Interactive Kali Terminal Simulator (`kali@kali:~$`)
+- Tactile clay shell container with scanlines and authentic zsh prompt.
 - **Command History**: Browse through previous commands with <kbd>↑</kbd> and <kbd>↓</kbd> keys.
 - **Built-in Shell Commands**: `help`, `clear`, `whoami`, `id`, `uname -a`, `neofetch`, `ls`, `history`, `matrix`.
 - **Pre-Programmed Simulation**: Type or click "Run in Terminal" on any command card to see colored, realistic tool output.
 
-### ⚙️ 4. Dynamic Interactive Command Builder
+### ⚙️ 5. Dynamic Interactive Command Builder
 - Visual parameter builder for top complex tools:
   - **Nmap**: Configure scan types (SYN, Connect, UDP, ACK), port ranges, timing templates, NSE scripts, and evasion flags.
   - **SQLMap**: Set target URL, extraction targets (`--dbs`, `--tables`, `--dump`, `--os-shell`), level, risk, and threads.
@@ -74,11 +96,11 @@
   - **Msfvenom**: Choose OS platform (Windows, Linux, Android, PHP), architecture, payload type, and output formats.
 - Live real-time command generation with 1-click execution into the terminal simulator.
 
-### 🎯 5. Cybersecurity Scenario Challenge (Quiz)
+### 🎯 6. Cybersecurity Scenario Challenge (Quiz)
 - Interactive scenario questions testing tactical decision-making in realistic pentest conditions.
 - Instant feedback with technical explanations and scoring rank.
 
-### 📥 6. Cheat Sheet Exporter
+### 📥 7. Tactical Cheat Sheet Exporter
 - Export all commands or only bookmarked favorites into formatted Markdown (`.md`) or plain text (`.txt`).
 
 ---
@@ -87,26 +109,30 @@
 
 ```
 kalivault/
-├── public/                 # Static assets & icons
+├── public/                     # Static assets & icons
 ├── src/
 │   ├── components/
-│   │   ├── CommandBuilder.tsx      # Interactive command generator
-│   │   ├── CommandCard.tsx         # In-depth card with flags & output
-│   │   ├── CommandVault.tsx        # Search, filters, and category grid
-│   │   ├── CyberQuiz.tsx           # Scenario quiz challenge
-│   │   ├── ExportModal.tsx         # Markdown/Text exporter
-│   │   ├── Header.tsx              # Navigation & stats header
-│   │   └── TerminalSimulator.tsx   # Interactive Kali web CLI
+│   │   ├── ClayKaliSplash.tsx          # 3s Kali logo random-corner intro animation
+│   │   ├── CommandBuilder.tsx          # Interactive command generator
+│   │   ├── CommandCard.tsx             # In-depth card with flags & output
+│   │   ├── CommandVault.tsx            # Search, filters, and category grid
+│   │   ├── CyberQuiz.tsx               # Scenario quiz challenge
+│   │   ├── ExportModal.tsx             # Markdown/Text exporter
+│   │   ├── Header.tsx                  # Navigation, theme slider & stats header
+│   │   ├── LatestReleases.tsx          # Latest Tools & Releases Radar
+│   │   ├── TerminalSimulator.tsx       # Interactive Kali web CLI
+│   │   └── ThemeTransitionWave.tsx     # Morphing shockwave theme ripple
 │   ├── data/
-│   │   ├── commandsData.ts         # 45+ curated commands catalog
-│   │   └── quizData.ts             # Scenario quiz questions
-│   ├── App.tsx                     # Main layout & tab coordinator
-│   ├── index.css                   # Cyber dark theme & scanlines
-│   ├── main.tsx                    # React DOM entrypoint
-│   └── types.ts                    # TypeScript interfaces & types
+│   │   ├── commandsData.ts             # 45+ curated commands catalog
+│   │   ├── latestToolsData.ts          # Updated/added Kali tools database
+│   │   └── quizData.ts                 # Scenario quiz questions
+│   ├── App.tsx                         # Main layout & theme coordinator
+│   ├── index.css                       # Claymorphism CSS tokens & animations
+│   ├── main.tsx                        # React DOM entrypoint
+│   └── types.ts                        # TypeScript interfaces & types
 ├── package.json
 ├── tsconfig.json
-├── vercel.json                     # Vercel deployment configuration
+├── vercel.json                         # Vercel deployment configuration
 └── vite.config.ts
 ```
 
@@ -145,11 +171,10 @@ kalivault/
 
 ## 📤 Pushing to GitHub
 
-1. Initialize git and commit your files:
+1. Ensure all changes are committed:
    ```bash
-   git init -b main
    git add .
-   git commit -m "feat: initial commit for KaliVault"
+   git commit -m "feat: complete KaliVault with Claymorphism and Kali logo splash"
    ```
 
 2. Create a new repository on [GitHub](https://github.com/new) (e.g., `kalivault`).
@@ -157,6 +182,7 @@ kalivault/
 3. Link your local repository and push:
    ```bash
    git remote add origin https://github.com/<your-username>/kalivault.git
+   git branch -M main
    git push -u origin main
    ```
 
@@ -164,13 +190,13 @@ kalivault/
 
 ## 🌐 Deploying to Vercel
 
-The project includes `vercel.json` pre-configured for Vite SPA deployments.
+The project includes `vercel.json` pre-configured for Vite Single Page Application routing.
 
 ### Option 1: Via Vercel Web Dashboard (Recommended)
 1. Go to [vercel.com/new](https://vercel.com/new).
-2. Connect your GitHub account and import the `kalivault` repository.
-3. Vercel will automatically detect **Vite** as the framework.
-4. Click **Deploy**. Your app will be live with an SSL certificate in seconds!
+2. Connect your GitHub account and import your `kalivault` repository.
+3. Vercel will automatically detect **Vite** as the framework preset.
+4. Click **Deploy**. Your app will be live with free SSL in seconds!
 
 ### Option 2: Via Vercel CLI
 ```bash
