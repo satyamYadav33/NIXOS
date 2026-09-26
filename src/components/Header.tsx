@@ -65,14 +65,14 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="text-lg sm:text-xl font-black tracking-tight font-mono">
+                <span className="text-lg sm:text-xl font-black tracking-tight font-mono text-slate-900 dark:text-slate-100">
                   Kali<span className="text-cyan-500">Vault</span>
                 </span>
                 <span className="clay-badge px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase text-cyan-600 dark:text-cyan-400">
                   CLAY SEC
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 hidden sm:block font-medium">
+              <p className="text-[11px] text-slate-700 dark:text-slate-300 hidden sm:block font-medium">
                 Tactical Kali Linux Intelligence Hub
               </p>
             </div>

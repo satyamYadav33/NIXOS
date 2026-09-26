@@ -106,7 +106,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
             Latest Tools & Releases Radar
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
             Stay ahead of the offensive security curve. Track tools recently added to Kali package repositories, community-driven successors to retired tools (like <strong className="text-cyan-600 dark:text-cyan-400">NetExec</strong> replacing CrackMapExec), and architectural overhauls (like <strong className="text-cyan-600 dark:text-cyan-400">BloodHound CE</strong> and <strong className="text-cyan-600 dark:text-cyan-400">Snort 3</strong>).
           </p>
 
@@ -129,13 +129,13 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
         
         {/* Search Input */}
         <div className="relative flex-1 min-w-[240px] max-w-md">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 dark:text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search updated tools, packages, capabilities..."
-            className="w-full pl-10 pr-4 py-2 clay-inset text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
+            className="w-full pl-10 pr-4 py-2 clay-inset text-xs text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500/50 font-medium"
           />
         </div>
 
@@ -156,7 +156,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
                 className={`clay-btn px-3 py-1.5 text-xs font-semibold shrink-0 transition-all ${
                   selectedChangeType === type
                     ? 'clay-btn-primary shadow-lg'
-                    : 'text-slate-600 dark:text-slate-400'
+                    : 'text-slate-700 dark:text-slate-300 font-medium'
                 }`}
               >
                 {labels[type]}
@@ -169,7 +169,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
 
       {/* Release Version Tabs (Clay Pills) */}
       <div className="flex items-center space-x-2.5 overflow-x-auto pb-1 text-xs no-scrollbar px-1">
-        <span className="clay-badge px-3 py-1 text-slate-500 dark:text-slate-400 uppercase font-bold text-[10px] tracking-wider shrink-0 flex items-center gap-1.5">
+        <span className="clay-badge px-3 py-1 text-slate-700 dark:text-slate-300 uppercase font-bold text-[10px] tracking-wider shrink-0 flex items-center gap-1.5">
           <Layers className="w-3.5 h-3.5 text-cyan-500" />
           Release Cycle:
         </span>
@@ -178,7 +178,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
           className={`clay-btn px-3.5 py-1.5 text-xs font-mono font-bold transition-all shrink-0 ${
             selectedVersion === 'all'
               ? 'clay-btn-primary'
-              : 'text-slate-600 dark:text-slate-300'
+              : 'text-slate-700 dark:text-slate-300'
           }`}
         >
           All Releases ({LATEST_TOOLS_DATA.length})
@@ -192,7 +192,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
               className={`clay-btn px-3.5 py-1.5 text-xs font-mono font-bold transition-all shrink-0 ${
                 selectedVersion === ver
                   ? 'clay-btn-primary'
-                  : 'text-slate-600 dark:text-slate-300'
+                  : 'text-slate-700 dark:text-slate-300'
               }`}
             >
               {ver} ({count})
@@ -240,7 +240,7 @@ export const LatestReleases: React.FC<LatestReleasesProps> = ({ onRunInTerminal 
                       </code>
                     </h2>
 
-                    <p className="text-xs text-slate-700 dark:text-slate-400 font-semibold mt-1">
+                    <p className="text-xs text-slate-700 dark:text-slate-300 font-semibold mt-1">
                       {tool.category}
                     </p>
                   </div>

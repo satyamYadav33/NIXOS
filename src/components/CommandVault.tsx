@@ -358,7 +358,7 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
             <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
               {activeCategoryMeta.name}
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-700 dark:text-slate-300 mt-0.5 font-medium">
               {activeCategoryMeta.description}
             </p>
           </div>
@@ -399,7 +399,7 @@ export const CommandVault: React.FC<CommandVaultProps> = ({
             <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
               No tactical commands found
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1">
+            <p className="text-xs text-slate-700 dark:text-slate-300 max-w-sm mx-auto mt-1 font-medium">
               No commands matched your active filter query. Try clearing filters or searching for alternative tools.
             </p>
           </div>

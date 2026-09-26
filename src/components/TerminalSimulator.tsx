@@ -312,7 +312,7 @@ Knock, knock, Neo.`;
 
       </div>
 
-      <div className="text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between px-2 font-mono font-medium">
+      <div className="text-xs text-slate-700 dark:text-slate-300 flex items-center justify-between px-2 font-mono font-medium">
         <span>Tip: Use <kbd className="clay-badge px-2 py-0.5 text-slate-800 dark:text-slate-200 font-bold">↑</kbd> and <kbd className="clay-badge px-2 py-0.5 text-slate-800 dark:text-slate-200 font-bold">↓</kbd> arrows to navigate command history</span>
         <span className="clay-badge px-2.5 py-0.5 text-[10px] font-bold text-slate-700 dark:text-slate-300">Simulated Shell Environment</span>
       </div>

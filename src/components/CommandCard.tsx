@@ -174,7 +174,7 @@ export const CommandCard: React.FC<CommandCardProps> = ({
           <button
             onClick={() => onToggleBookmark(command.id)}
             title={isBookmarked ? 'Remove Bookmark' : 'Bookmark Command'}
-            className="clay-btn p-2 text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
+            className="clay-btn p-2 text-slate-600 dark:text-slate-400 hover:text-amber-500 transition-colors cursor-pointer"
           >
             <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-amber-400 text-amber-500' : ''}`} />
           </button>
@@ -206,7 +206,7 @@ export const CommandCard: React.FC<CommandCardProps> = ({
         <div className="clay-inset p-3.5 font-mono text-xs">
           <div className="flex items-center justify-between gap-2">
             <div className="flex-1 overflow-x-auto text-emerald-700 dark:text-emerald-400 font-bold py-1 pr-2 select-all">
-              <span className="text-slate-500 dark:text-slate-400 select-none mr-2 font-normal">$</span>
+              <span className="text-slate-600 dark:text-slate-400 select-none mr-2 font-normal">$</span>
               {command.command}
             </div>
             

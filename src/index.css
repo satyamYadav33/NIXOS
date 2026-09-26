@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -56,6 +58,14 @@
     min-height: 100vh;
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .bg-app {
+    background-color: var(--bg-app);
+  }
+
+  .bg-surface {
+    background-color: var(--bg-surface);
   }
 
   code, pre, .font-mono {
