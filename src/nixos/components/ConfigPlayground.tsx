@@ -34,55 +34,39 @@ export const ConfigPlayground: React.FC = () => {
     setEvaluationSuccess(false);
   };
 
-  // Generate dynamic Nix code
   const generateNixCode = () => {
     const enabledModules = CONFIG_MODULE_OPTIONS.filter(m => selectedModuleIds.has(m.id));
 
     if (configFormat === 'classic') {
       return `# /etc/nixos/configuration.nix
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# Declarative blueprint generated via NixOS Studio
 
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
-  # Networking & Host identity
   networking.hostName = "${hostname}";
+  time.timeZone = "UTC";
+  i18n.defaultLocale = "en_US.UTF-8";
+  nixpkgs.config.allowUnfree = true;
 
 ${enabledModules.map(m => `  # --- ${m.title} ---
 ${m.nixCodeSnippet.split('\n').map(line => `  ${line}`).join('\n')}`).join('\n\n')}
 
-  # Set your time zone & Internationalisation
-  time.timeZone = "UTC";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  # Allow unfree packages (e.g. proprietary drivers, VS Code)
-  nixpkgs.config.allowUnfree = true;
-
-  # Do NOT change this value unless you have read the changelog!
   system.stateVersion = "24.05";
 }
 `;
     } else {
-      // Modern Flake format
       return `# /etc/nixos/flake.nix
 {
   description = "Pure Deterministic NixOS Flake for ${hostname}";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -129,7 +113,7 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
     setTimeout(() => {
       setIsEvaluating(false);
       setEvaluationSuccess(true);
-    }, 1000);
+    }, 800);
   };
 
   return (
@@ -137,27 +121,27 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-bold">
+        <div className="clay-badge inline-flex items-center gap-1.5 px-3 py-1 text-cyan-600 dark:text-cyan-400 text-xs font-bold">
           <Code2 className="w-3.5 h-3.5" />
           <span>Interactive Declarative Studio</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
           <span className="font-mono text-cyan-600 dark:text-cyan-400">configuration.nix</span> Live Studio
         </h2>
-        <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          The single set of files whose very beautiful name is <code className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 font-mono text-xs">configuration.nix</code>. Toggle features below and watch the pure Nix syntax update live in real-time.
+        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          Toggle features below and watch the pure Nix syntax synthesize in real-time.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Column: Interactive Feature Toggles */}
-        <div className="lg:col-span-5 space-y-6">
+        {/* Left Column: Toggles & Parameters */}
+        <div className="lg:col-span-5 space-y-5">
           
           {/* Identity Parameters */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-              System Identity & Mode
+          <div className="clay-card p-5 space-y-3">
+            <h3 className="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+              Host Identity & Blueprint Format
             </h3>
             
             <div className="grid grid-cols-2 gap-3">
@@ -167,18 +151,18 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
                   type="text"
                   value={hostname}
                   onChange={(e) => setHostname(e.target.value || 'nixbox')}
-                  className="w-full px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500 mt-1"
+                  className="w-full px-3 py-1.5 rounded-xl clay-inset text-xs font-mono text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500 mt-1"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-slate-500">Config Format</label>
-                <div className="flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 mt-1">
+                <label className="text-[11px] font-semibold text-slate-500">Format</label>
+                <div className="flex clay-inset p-1 mt-1">
                   <button
                     onClick={() => setConfigFormat('classic')}
-                    className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-all ${
+                    className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${
                       configFormat === 'classic'
-                        ? 'bg-cyan-500 text-white shadow-sm'
+                        ? 'clay-btn-primary text-white shadow-sm'
                         : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
@@ -186,9 +170,9 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
                   </button>
                   <button
                     onClick={() => setConfigFormat('flake')}
-                    className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-all ${
+                    className={`flex-1 py-1 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${
                       configFormat === 'flake'
-                        ? 'bg-blue-600 text-white shadow-sm'
+                        ? 'clay-btn-primary text-white shadow-sm'
                         : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
@@ -199,13 +183,13 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
             </div>
           </div>
 
-          {/* Module Switcher List */}
-          <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+          {/* Module Selector */}
+          <div className="clay-card p-5 space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                Declarative Modules
+              <h3 className="text-xs font-mono font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                Declarative System Modules
               </h3>
-              <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold">
+              <span className="clay-badge px-2 py-0.5 text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold">
                 {selectedModuleIds.size} / {CONFIG_MODULE_OPTIONS.length} active
               </span>
             </div>
@@ -219,16 +203,16 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
                     onClick={() => toggleModule(module.id)}
                     className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-start gap-3 ${
                       isChecked
-                        ? 'border-cyan-500/50 bg-cyan-500/5 dark:bg-cyan-500/10'
-                        : 'border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-800/40 opacity-75'
+                        ? 'border-cyan-500/60 bg-cyan-500/10 shadow-sm'
+                        : 'clay-card hover:border-cyan-400/40 opacity-75'
                     }`}
                   >
-                    <input
-                      type="checkbox"
-                      checked={isChecked}
-                      onChange={() => {}} // Handled by container onClick
-                      className="mt-1 w-4 h-4 rounded text-cyan-600 focus:ring-cyan-500 cursor-pointer pointer-events-none"
-                    />
+                    {/* Visual Custom Clay Switch */}
+                    <div className="mt-0.5">
+                      <div className={`w-8 h-4.5 rounded-full p-0.5 transition-colors ${isChecked ? 'bg-cyan-500' : 'bg-slate-300 dark:bg-slate-700'}`}>
+                        <div className={`w-3.5 h-3.5 rounded-full bg-white transition-transform ${isChecked ? 'translate-x-3.5' : 'translate-x-0'}`} />
+                      </div>
+                    </div>
 
                     <div className="flex-1 space-y-1">
                       <div className="flex items-center justify-between">
@@ -236,12 +220,12 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
                           {module.title}
                         </span>
                         {module.badge && (
-                          <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                          <span className="clay-badge text-[9px] font-mono px-1.5 py-0.2 text-slate-600 dark:text-slate-300">
                             {module.badge}
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                      <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
                         {module.description}
                       </p>
                     </div>
@@ -253,13 +237,12 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
 
         </div>
 
-        {/* Right Column: Live Syntax-Highlighted Code Box */}
-        <div className="lg:col-span-7 p-6 rounded-3xl bg-slate-950 text-white border border-slate-800 shadow-xl space-y-4">
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        {/* Right Column: Visual Syntax-Highlighted Screen */}
+        <div className="lg:col-span-7 clay-card p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 dark:border-slate-800/60 pb-3">
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-cyan-400" />
-              <span className="font-mono text-xs font-bold text-slate-200">
+              <FileText className="w-4 h-4 text-cyan-500" />
+              <span className="font-mono text-xs font-bold text-slate-800 dark:text-slate-200">
                 {configFormat === 'classic' ? '/etc/nixos/configuration.nix' : '/etc/nixos/flake.nix'}
               </span>
             </div>
@@ -267,28 +250,28 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer"
+                className="clay-btn px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 transition-all flex items-center gap-1.5 cursor-pointer"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-cyan-500" />}
                 <span>{copied ? 'Copied!' : 'Copy Code'}</span>
               </button>
 
               <button
                 onClick={handleDownload}
-                className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer"
+                className="clay-btn px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 transition-all flex items-center gap-1.5 cursor-pointer"
               >
-                <Download className="w-3.5 h-3.5" />
+                <Download className="w-3.5 h-3.5 text-blue-500" />
                 <span>Export .nix</span>
               </button>
 
               <button
                 onClick={handleSimulateBuild}
                 disabled={isEvaluating}
-                className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                className="clay-btn-primary px-3.5 py-1.5 text-white font-black text-xs transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
               >
                 {isEvaluating ? (
                   <>
-                    <div className="w-3 h-3 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     <span>Evaluating...</span>
                   </>
                 ) : (
@@ -301,26 +284,24 @@ ${m.nixCodeSnippet.split('\n').map(line => `          ${line}`).join('\n')}`).jo
             </div>
           </div>
 
-          {/* Code Viewer */}
+          {/* Syntax Display Box */}
           <div className="relative">
-            <pre className="p-4 rounded-2xl bg-black/90 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto max-h-[500px] border border-slate-800/80">
+            <pre className="clay-inset p-4 font-mono text-xs text-slate-800 dark:text-slate-200 leading-relaxed overflow-x-auto max-h-[500px]">
               <code>{code}</code>
             </pre>
           </div>
 
-          {/* Evaluation Simulation Result */}
           {evaluationSuccess && (
-            <div className="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/50 text-emerald-200 space-y-2 animate-fadeIn font-mono text-xs">
-              <div className="flex items-center gap-2 font-bold text-emerald-400">
-                <CheckCircle2 className="w-4 h-4" />
+            <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 space-y-1 animate-fadeIn font-mono text-xs">
+              <div className="flex items-center gap-2 font-bold">
+                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>Nix Evaluation Passed! Zero syntax impurities.</span>
               </div>
-              <p className="text-[11px] text-emerald-300/90 leading-relaxed">
-                Evaluated {selectedModuleIds.size} modules into a deterministic system closure. Derivation path: <code className="text-white">/nix/store/1a7c...-nixos-system-{hostname}.drv</code>. Ready to be deployed via <code className="text-white">sudo nixos-rebuild switch</code>.
+              <p className="text-[11px] opacity-90">
+                Synthesized {selectedModuleIds.size} modules into a deterministic system closure: <code className="font-bold">/nix/store/1a7c...-system-{hostname}.drv</code>.
               </p>
             </div>
           )}
-
         </div>
 
       </div>

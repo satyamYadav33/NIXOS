@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { NixHubTab } from '../types';
 import { 
   RotateCcw, 
@@ -10,7 +10,10 @@ import {
   Cpu, 
   Box, 
   Copy, 
-  Check 
+  Check,
+  FileCode2,
+  GitBranch,
+  ShieldCheck
 } from 'lucide-react';
 
 interface NixosHeroProps {
@@ -18,7 +21,8 @@ interface NixosHeroProps {
 }
 
 export const NixosHero: React.FC<NixosHeroProps> = ({ onNavigate }) => {
-  const [copiedCmd, setCopiedCmd] = React.useState<string | null>(null);
+  const [copiedCmd, setCopiedCmd] = useState<string | null>(null);
+  const [activePipelineStep, setActivePipelineStep] = useState<number>(0);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -26,161 +30,174 @@ export const NixosHero: React.FC<NixosHeroProps> = ({ onNavigate }) => {
     setTimeout(() => setCopiedCmd(null), 2000);
   };
 
-  const featurePills = [
+  const pipelineSteps = [
     {
-      title: 'Nix: Functional Package Manager',
-      desc: 'Isolates software in /nix/store. Zero dependency collisions.',
-      tab: 'architecture' as NixHubTab,
-      icon: <Box className="w-4 h-4 text-cyan-500" />
+      title: '1. Declarative Spec',
+      label: 'configuration.nix',
+      icon: <FileCode2 className="w-4 h-4 text-cyan-500" />,
+      detail: 'A single declarative blueprint defining your kernel, networking, user accounts, and services.',
+      actionTab: 'config-builder' as NixHubTab
     },
     {
-      title: 'NixOS: Declarative Operating System',
-      desc: 'The entire OS, services & users defined in configuration.nix.',
-      tab: 'config-builder' as NixHubTab,
-      icon: <Layers className="w-4 h-4 text-blue-500" />
+      title: '2. Pure Evaluation',
+      label: 'Nix Derivations',
+      icon: <Cpu className="w-4 h-4 text-blue-500" />,
+      detail: 'Nix compiles derivations mathematically from inputs without touching or mutating the running host.',
+      actionTab: 'architecture' as NixHubTab
     },
     {
-      title: 'Sub-Second Rollbacks',
-      desc: 'Instantly revert broken updates with `nixos-rebuild switch --rollback`.',
-      tab: 'rollback-timemachine' as NixHubTab,
-      icon: <RotateCcw className="w-4 h-4 text-emerald-500" />
+      title: '3. Immutable Store',
+      label: '/nix/store/<hash>',
+      icon: <Box className="w-4 h-4 text-indigo-500" />,
+      detail: 'Software is isolated by cryptographic hashes. Zero dependency hell or shared library clobbering.',
+      actionTab: 'store-graph' as NixHubTab
     },
     {
-      title: 'Bit-for-Bit Reproducibility',
-      desc: 'Share a configuration or flake to replicate identical machines.',
-      tab: 'imperative-vs-declarative' as NixHubTab,
-      icon: <Cpu className="w-4 h-4 text-indigo-500" />
+      title: '4. Atomic Switch',
+      label: '0.4s Symlink Flip',
+      icon: <RotateCcw className="w-4 h-4 text-emerald-500" />,
+      detail: 'Atomic pointer update to the new generation. Revert anytime with `nixos-rebuild switch --rollback`!',
+      actionTab: 'rollback-timemachine' as NixHubTab
     }
   ];
 
   return (
-    <section className="relative overflow-hidden pt-8 pb-12 lg:pt-14 lg:pb-16 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent">
-      {/* Background Decorative Glow Circles */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-500/15 via-sky-500/10 to-indigo-500/10 blur-3xl pointer-events-none rounded-full" />
+    <section className="relative overflow-hidden pt-6 pb-12 lg:pt-10 lg:pb-14">
+      
+      {/* Background Soft Glow Halos */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-cyan-500/15 via-sky-500/10 to-indigo-500/10 blur-3xl pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
+        
+        {/* Top Hero Grid: Headlines + 3D Holographic Snowflake */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          {/* Left Column: Core Value Proposition */}
-          <div className="lg:col-span-7 flex flex-col gap-6 text-left">
+          {/* Left Column: Core Value Proposition in Claymorphic Cards */}
+          <div className="lg:col-span-7 flex flex-col gap-5 text-left">
             
             {/* Super Header Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-600 dark:text-cyan-400 text-xs font-bold w-fit shadow-sm">
+            <div className="clay-badge inline-flex items-center gap-2 px-3.5 py-1.5 text-cyan-600 dark:text-cyan-400 text-xs font-bold w-fit">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>Declarative Linux Architecture & Package Isolation</span>
+              <span className="font-mono">Pure Functional OS & Atomic Rollback Engine</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-              Master <span className="bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 bg-clip-text text-transparent">Nix & NixOS</span>:
-              <br />
-              The Pure Declarative Revolution.
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+              The Operating System{' '}
+              <span className="bg-gradient-to-r from-cyan-500 via-sky-400 to-blue-600 bg-clip-text text-transparent">
+                You Cannot Brick.
+              </span>
             </h1>
 
-            {/* Core Distinction Quote (Grounded in User Explanation) */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm backdrop-blur-sm relative">
-              <div className="absolute -left-1 top-4 bottom-4 w-1 bg-gradient-to-b from-cyan-500 to-blue-600 rounded-full" />
-              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed pl-2">
-                <span className="font-bold text-cyan-600 dark:text-cyan-400">Nix is the package manager:</span> responsible for installing, managing, and isolating software packages on Linux & macOS without dependency conflicts.
-                <br className="my-1 sm:block hidden" />
-                <span className="font-bold text-blue-600 dark:text-blue-400">NixOS is the operating system:</span> extending that declarative management to the entire machine in <code className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-300 font-mono text-xs">configuration.nix</code> with atomic generations and instant rollbacks.
+            {/* Claymorphic Tactile Concept Card */}
+            <div className="clay-card p-5 sm:p-6 space-y-3 relative overflow-hidden group">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 uppercase">
+                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <span>The Core Distinction</span>
+              </div>
+              <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+                <strong className="text-slate-900 dark:text-white font-black text-cyan-600 dark:text-cyan-400">Nix is the package manager:</strong> isolating software in content-addressed store paths on Linux & macOS.
+                <br />
+                <strong className="text-slate-900 dark:text-white font-black text-blue-600 dark:text-blue-400">NixOS is the operating system:</strong> declaring your entire machine state in <code className="px-1.5 py-0.5 rounded-lg bg-slate-200 dark:bg-slate-800 text-cyan-600 dark:text-cyan-300 font-mono text-xs font-bold">configuration.nix</code> with sub-second atomic rollbacks.
               </p>
             </div>
 
-            {/* Command Showcase Quick Pill */}
+            {/* Quick Rollback Command Bar with Tactile Button */}
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs border border-slate-800 shadow-md">
-                <span className="text-cyan-400 select-none">$</span>
+              <div className="clay-inset flex items-center gap-2 px-4 py-2 font-mono text-xs text-slate-900 dark:text-slate-100 font-bold shadow-inner">
+                <span className="text-cyan-500 select-none">$</span>
                 <span>sudo nixos-rebuild switch --rollback</span>
                 <button
                   onClick={() => copyToClipboard('sudo nixos-rebuild switch --rollback')}
-                  className="ml-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                  className="ml-2 p-1 rounded-lg text-slate-400 hover:text-cyan-500 transition-colors cursor-pointer"
                   title="Copy rollback command"
                 >
                   {copiedCmd === 'sudo nixos-rebuild switch --rollback' ? (
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
                   ) : (
                     <Copy className="w-3.5 h-3.5" />
                   )}
                 </button>
               </div>
 
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                ⚡ Reverts broken updates in 0.4 seconds!
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                <span>Restores in ~0.4s!</span>
               </span>
             </div>
 
-            {/* Call to Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            {/* Call to Action Tactile Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               <button
                 onClick={() => onNavigate('rollback-timemachine')}
-                className="px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-sm shadow-md shadow-cyan-500/25 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                className="clay-btn-primary px-5 py-3 text-white font-black text-xs shadow-md active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>Simulate System Rollback</span>
-                <ArrowRight className="w-4 h-4 ml-0.5" />
+                <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
               </button>
 
               <button
                 onClick={() => onNavigate('architecture')}
-                className="px-5 py-3 rounded-xl bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/80 font-bold text-sm border border-slate-200 dark:border-slate-700 shadow-sm active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                className="clay-btn px-5 py-3 text-slate-800 dark:text-slate-200 font-bold text-xs active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
               >
                 <Layers className="w-4 h-4 text-cyan-500" />
-                <span>Explore Architecture</span>
+                <span>Visual Architecture</span>
               </button>
 
               <button
                 onClick={() => onNavigate('terminal')}
-                className="px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium text-sm transition-all flex items-center gap-1.5 cursor-pointer"
+                className="clay-btn px-4 py-3 text-slate-700 dark:text-slate-300 font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <Terminal className="w-4 h-4 text-slate-500" />
-                <span>Terminal</span>
+                <span>Terminal Sim</span>
               </button>
             </div>
+
           </div>
 
-          {/* Right Column: Interactive Visual Snowflake & System Derivation Reactor */}
+          {/* Right Column: 3D Claymorphic Snowflake Reactor Visual Card */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <div className="relative w-full max-w-md p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800/80 shadow-xl overflow-hidden">
+            <div className="clay-card w-full max-w-md p-6 relative overflow-hidden group">
               
-              {/* Header of Reactor Card */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200/60 dark:border-slate-800/60">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-400 shadow-sm" />
+                  <div className="w-3 h-3 rounded-full bg-amber-400 shadow-sm" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-400 shadow-sm" />
                 </div>
-                <div className="text-[11px] font-mono font-semibold text-slate-400 dark:text-slate-500">
-                  closure-derivation.drv
+                <div className="text-[11px] font-mono font-bold text-slate-500 dark:text-slate-400">
+                  pure-system-closure.drv
                 </div>
-                <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-500">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Pure Closure</span>
+                <div className="clay-badge px-2 py-0.5 text-[10px] font-black text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3" />
+                  <span>Atomic</span>
                 </div>
               </div>
 
-              {/* Animated Interactive Snowflake Graphic */}
+              {/* Animated 3D Snowflake Core with Orbiting Derivation Nodes */}
               <div className="py-8 flex flex-col items-center justify-center relative">
                 
-                {/* Floating Derivation Badges Around Center */}
-                <div className="absolute top-2 left-2 text-[10px] font-mono px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 animate-bounce">
+                {/* Floating Tactile Badges Orbiting the Snowflake */}
+                <div className="clay-badge absolute top-1 left-2 text-[10px] font-mono px-2 py-0.5 text-cyan-600 dark:text-cyan-400 font-bold shadow-sm animate-bounce">
                   /nix/store/7v9x...-nginx
                 </div>
-                <div className="absolute top-4 right-2 text-[10px] font-mono px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                <div className="clay-badge absolute top-3 right-1 text-[10px] font-mono px-2 py-0.5 text-blue-600 dark:text-blue-400 font-bold shadow-sm">
                   kernel-6.6.52.drv
                 </div>
-                <div className="absolute bottom-4 left-4 text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                <div className="clay-badge absolute bottom-2 left-2 text-[10px] font-mono px-2 py-0.5 text-indigo-600 dark:text-indigo-400 font-bold shadow-sm">
                   configuration.nix
                 </div>
-                <div className="absolute bottom-2 right-4 text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 animate-pulse">
-                  Gen 45: Active
+                <div className="clay-badge absolute bottom-1 right-2 text-[10px] font-mono px-2 py-0.5 text-emerald-600 dark:text-emerald-400 font-black shadow-sm animate-pulse">
+                  Gen 45: Live
                 </div>
 
-                {/* Central Snowflake Node */}
-                <div className="relative w-36 h-36 flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full bg-cyan-500/15 animate-ping duration-1000" />
-                  <div className="relative z-10 w-28 h-28 rounded-2xl bg-gradient-to-tr from-slate-900 to-slate-800 border-2 border-cyan-400/40 shadow-2xl flex items-center justify-center group cursor-pointer hover:rotate-90 transition-transform duration-700">
-                    <svg viewBox="0 0 100 100" className="w-18 h-18 text-cyan-400" fill="currentColor">
+                {/* Central 3D Bulbous Snowflake */}
+                <div className="relative w-40 h-40 flex items-center justify-center cursor-pointer group/snowflake">
+                  <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-xl animate-pulse" />
+                  <div className="relative z-10 w-32 h-32 rounded-3xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-950 border-2 border-cyan-400/40 shadow-2xl flex items-center justify-center group-hover/snowflake:rotate-90 transition-transform duration-700">
+                    <svg viewBox="0 0 100 100" className="w-20 h-20 text-cyan-400 drop-shadow-[0_4px_10px_rgba(6,182,212,0.5)]" fill="currentColor">
                       <g transform="translate(50,50)">
                         {[0, 60, 120, 180, 240, 300].map((deg, i) => (
                           <g key={deg} transform={`rotate(${deg})`}>
@@ -196,29 +213,29 @@ export const NixosHero: React.FC<NixosHeroProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                <div className="mt-4 text-center">
-                  <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                <div className="mt-3 text-center">
+                  <div className="text-xs font-black text-slate-800 dark:text-slate-200">
                     Deterministic Closure Tree
                   </div>
                   <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-                    Input Hash: <span className="text-cyan-500 font-semibold">0z3j8fk7x12a9v4p</span>
+                    Hash: <span className="text-cyan-500 font-bold">0z3j8fk7x12a9v4p</span>
                   </div>
                 </div>
               </div>
 
-              {/* Bottom Metrics Grid */}
-              <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
-                <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                  <div className="text-xs font-bold text-slate-900 dark:text-white font-mono">100%</div>
-                  <div className="text-[10px] text-slate-500">Reproducible</div>
+              {/* Bottom Tactile Circular Gauges Grid */}
+              <div className="grid grid-cols-3 gap-2.5 pt-3 border-t border-slate-200/60 dark:border-slate-800/60 text-center">
+                <div className="clay-inset p-2.5 space-y-0.5">
+                  <div className="text-xs font-black text-slate-900 dark:text-white font-mono">100%</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Reproducible</div>
                 </div>
-                <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                  <div className="text-xs font-bold text-cyan-500 font-mono">0.4s</div>
-                  <div className="text-[10px] text-slate-500">Rollback</div>
+                <div className="clay-inset p-2.5 space-y-0.5">
+                  <div className="text-xs font-black text-cyan-500 font-mono">0.4s</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Rollback</div>
                 </div>
-                <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-800/50">
-                  <div className="text-xs font-bold text-blue-500 font-mono">0</div>
-                  <div className="text-[10px] text-slate-500">Collisions</div>
+                <div className="clay-inset p-2.5 space-y-0.5">
+                  <div className="text-xs font-black text-blue-500 font-mono">0</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Collisions</div>
                 </div>
               </div>
 
@@ -227,33 +244,71 @@ export const NixosHero: React.FC<NixosHeroProps> = ({ onNavigate }) => {
 
         </div>
 
-        {/* Feature Highlights Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
-          {featurePills.map((pill, i) => (
-            <div
-              key={i}
-              onClick={() => onNavigate(pill.tab)}
-              className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform">
-                    {pill.icon}
-                  </div>
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
-                    {pill.title}
-                  </h3>
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {pill.desc}
-                </p>
+        {/* Visual Interactive Architecture Pipeline Flow Diagram */}
+        <div className="clay-card p-6 sm:p-8 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200/60 dark:border-slate-800/60 pb-4">
+            <div>
+              <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider mb-1">
+                <GitBranch className="w-4 h-4" />
+                <span>Visual Execution Pipeline</span>
               </div>
-              <div className="flex items-center gap-1 text-[11px] font-bold text-cyan-600 dark:text-cyan-400 mt-3 pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                <span>Explore Interactive</span>
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </div>
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
+                How NixOS Transforms Code Into an Operating System
+              </h3>
             </div>
-          ))}
+            <span className="text-xs text-slate-500 font-mono">
+              Click any step to inspect
+            </span>
+          </div>
+
+          {/* 4 Interactive Pipeline Slabs with Animated Flow */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+            {pipelineSteps.map((step, idx) => {
+              const isSelected = activePipelineStep === idx;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => {
+                    setActivePipelineStep(idx);
+                    onNavigate(step.actionTab);
+                  }}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between group ${
+                    isSelected
+                      ? 'border-cyan-500 bg-cyan-500/10 shadow-md transform -translate-y-1'
+                      : 'clay-card hover:border-cyan-400/40'
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform">
+                        {step.icon}
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-slate-400">
+                        STEP 0{idx + 1}
+                      </span>
+                    </div>
+
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                      {step.title}
+                    </h4>
+
+                    <div className="clay-inset px-2.5 py-1 text-[11px] font-mono text-cyan-600 dark:text-cyan-400 font-bold truncate">
+                      {step.label}
+                    </div>
+
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed pt-1">
+                      {step.detail}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-1 text-[10px] font-bold text-cyan-600 dark:text-cyan-400 mt-3 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+                    <span>Explore Interactive</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
       </div>

@@ -9,6 +9,7 @@ import { LatestReleases } from './components/LatestReleases';
 import { KaliSetupGuide } from './components/KaliSetupGuide';
 import { ExportModal } from './components/ExportModal';
 import { ClayKaliSplash } from './components/ClayKaliSplash';
+import { ClayNixSplash } from './nixos/components/ClayNixSplash';
 import { ThemeTransitionWave } from './components/ThemeTransitionWave';
 import { NixosHub } from './nixos/NixosHub';
 import { ShieldAlert, Terminal, ExternalLink, Flame, Laptop } from 'lucide-react';
@@ -39,8 +40,28 @@ export function App() {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [initialTerminalCommand, setInitialTerminalCommand] = useState<string | undefined>(undefined);
 
-  // Splash Screen state (only for Kali mode)
+  // Splash Screen state (for Kali mode)
   const [showSplash, setShowSplash] = useState(false);
+
+  // 3D Nix Splash Screen state (shows once per session, or replayable via navbar button)
+  const [showNixSplash, setShowNixSplash] = useState<boolean>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const seen = sessionStorage.getItem('nixos_splash_seen');
+        return !seen;
+      }
+    } catch {
+      return false;
+    }
+    return false;
+  });
+
+  const handleNixSplashComplete = () => {
+    setShowNixSplash(false);
+    try {
+      sessionStorage.setItem('nixos_splash_seen', 'true');
+    } catch {}
+  };
 
   // Theme state with local storage persistence
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -150,6 +171,14 @@ export function App() {
   if (activeUniverse === 'nixos') {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 relative overflow-x-hidden">
+        {/* 3D Claymorphic Nix Snowflake Splash Intro */}
+        {showNixSplash && (
+          <ClayNixSplash
+            onComplete={handleNixSplashComplete}
+            isDarkMode={theme === 'dark'}
+          />
+        )}
+
         {/* Full-Screen Smooth Theme Wave Morph Animation */}
         <ThemeTransitionWave
           isAnimating={isThemeTransitioning}
@@ -162,6 +191,7 @@ export function App() {
           onSwitchToKali={() => setActiveUniverse('kali')}
           theme={theme}
           onToggleTheme={handleToggleTheme}
+          onReplaySplash={() => setShowNixSplash(true)}
         />
       </div>
     );

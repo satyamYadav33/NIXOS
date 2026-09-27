@@ -20,12 +20,14 @@ interface NixosHubProps {
   onSwitchToKali: () => void;
   theme: 'dark' | 'light';
   onToggleTheme: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onReplaySplash?: () => void;
 }
 
 export const NixosHub: React.FC<NixosHubProps> = ({
   onSwitchToKali,
   theme,
-  onToggleTheme
+  onToggleTheme,
+  onReplaySplash
 }) => {
   const [activeTab, setActiveTab] = useState<NixHubTab>('overview');
 
@@ -44,6 +46,7 @@ export const NixosHub: React.FC<NixosHubProps> = ({
         onSwitchToKali={onSwitchToKali}
         theme={theme}
         onToggleTheme={onToggleTheme}
+        onReplaySplash={onReplaySplash}
       />
 
       {/* Main Content Area */}

@@ -27,13 +27,10 @@ export const NixTerminalSimulator: React.FC = () => {
     if (!trimmed) return;
 
     const promptPrefix = isInsideNixShell ? '[nix-shell:~]$ ' : 'nixos@nixbox:~$ ';
-
-    // Add user input to history
     setHistory(prev => [...prev, { type: 'input', content: `${promptPrefix}${trimmed}` }]);
 
     const lower = trimmed.toLowerCase();
 
-    // Check exit from nix-shell
     if (isInsideNixShell && lower === 'exit') {
       setIsInsideNixShell(false);
       setShellPackages([]);
@@ -82,7 +79,7 @@ export const NixTerminalSimulator: React.FC = () => {
           type: 'output',
           content: `switching from generation 45 to 44...
 activating the configuration...
-setting up /etc...
+setting up /etc symlinks...
 reloading services: nginx.service, sshd.service
 done. System successfully rolled back to last known good configuration in 0.39s!`
         }
@@ -97,14 +94,13 @@ done. System successfully rolled back to last known good configuration in 0.39s!
         {
           type: 'output',
           content: `building Nix...
-building the system configuration...
+building system configuration...
 these 4 derivations will be built:
   /nix/store/7v9x4p1k8w3m-configuration.nix.drv
   /nix/store/1a7c8z9x2m4k-etc-system.drv
 updating bootloader menu (systemd-boot)...
 activating the configuration...
 setting up /etc symlinks...
-reloading systemd units...
 done. New system closure activated: Generation 46.`
         }
       ]);
@@ -208,7 +204,6 @@ freed 18,412.34 MiB of disk space.`
       return;
     }
 
-    // Default response
     setHistory(prev => [
       ...prev,
       {
@@ -217,12 +212,6 @@ freed 18,412.34 MiB of disk space.`
       }
     ]);
     setInputVal('');
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleCommand(inputVal);
-    }
   };
 
   const chips = [
@@ -240,21 +229,21 @@ freed 18,412.34 MiB of disk space.`
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-bold">
+        <div className="clay-badge inline-flex items-center gap-1.5 px-3 py-1 text-cyan-600 dark:text-cyan-400 text-xs font-bold">
           <Terminal className="w-3.5 h-3.5" />
           <span>Interactive Shell Engine</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
           NixOS Terminal Simulator
         </h2>
-        <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          Test real NixOS rebuilds, atomic rollbacks, and ephemeral <code className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 font-mono text-xs">nix-shell</code> sandboxes right in your browser.
+        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          Test real NixOS rebuilds, atomic rollbacks, and ephemeral sandboxes right in your browser.
         </p>
       </div>
 
       {/* Suggestion Chips */}
       <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto">
-        <span className="text-xs text-slate-400 font-medium mr-1 flex items-center gap-1">
+        <span className="text-xs text-slate-400 font-bold mr-1 flex items-center gap-1">
           <Sparkles className="w-3 h-3 text-cyan-400" />
           <span>Quick Run:</span>
         </span>
@@ -262,22 +251,22 @@ freed 18,412.34 MiB of disk space.`
           <button
             key={cmd}
             onClick={() => handleCommand(cmd)}
-            className="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/20 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 border border-slate-200 dark:border-slate-700 font-mono text-[11px] transition-all cursor-pointer shadow-sm active:scale-95"
+            className="clay-btn px-2.5 py-1 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 font-mono text-[11px] transition-all cursor-pointer"
           >
             {cmd}
           </button>
         ))}
       </div>
 
-      {/* Terminal Window Box */}
-      <div className="max-w-4xl mx-auto rounded-3xl bg-slate-950 border-2 border-slate-800 shadow-2xl overflow-hidden font-mono text-xs">
+      {/* Terminal Window Box in Clay Frame */}
+      <div className="max-w-4xl mx-auto clay-card p-2 sm:p-3 overflow-hidden">
         
         {/* Terminal Title Bar */}
-        <div className="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+        <div className="px-4 py-2.5 bg-slate-900 rounded-t-2xl border-b border-slate-800 flex items-center justify-between font-mono text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
-            <div className="w-3 h-3 rounded-full bg-amber-500" />
-            <div className="w-3 h-3 rounded-full bg-emerald-500" />
+            <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm" />
+            <div className="w-3 h-3 rounded-full bg-amber-500 shadow-sm" />
+            <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-sm" />
             <span className="ml-2 text-slate-400 text-xs font-semibold">
               {isInsideNixShell ? 'nix-shell (ephemeral sandboxed session)' : 'nixos@nixbox:~ (bash)'}
             </span>
@@ -300,7 +289,7 @@ freed 18,412.34 MiB of disk space.`
         </div>
 
         {/* Terminal Body */}
-        <div className="p-5 space-y-2.5 min-h-[380px] max-h-[500px] overflow-y-auto">
+        <div className="p-5 bg-black/95 rounded-b-2xl font-mono text-xs space-y-2.5 min-h-[380px] max-h-[500px] overflow-y-auto">
           {history.map((item, idx) => (
             <div key={idx} className="whitespace-pre-wrap leading-relaxed">
               {item.type === 'system' && (
@@ -329,7 +318,7 @@ freed 18,412.34 MiB of disk space.`
         </div>
 
         {/* Terminal Input Bar */}
-        <div className="p-3 bg-slate-900/90 border-t border-slate-800 flex items-center gap-2">
+        <div className="p-2.5 bg-slate-900/90 rounded-b-2xl border-t border-slate-800 flex items-center gap-2 font-mono text-xs mt-1">
           <span className="text-cyan-400 font-bold whitespace-nowrap pl-2">
             {isInsideNixShell ? '[nix-shell:~]$' : 'nixos@nixbox:~$'}
           </span>
@@ -337,7 +326,7 @@ freed 18,412.34 MiB of disk space.`
             type="text"
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => e.key === 'Enter' && handleCommand(inputVal)}
             placeholder={isInsideNixShell ? 'Type "exit" to leave shell...' : 'Type a command, e.g. sudo nixos-rebuild switch --rollback'}
             className="flex-1 bg-transparent text-white outline-none text-xs placeholder-slate-500 font-mono"
             autoFocus
