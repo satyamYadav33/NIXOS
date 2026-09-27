@@ -16,6 +16,21 @@
 
 </div>
 
+## ❄️ Featured: Nix & NixOS Declarative OS Studio
+
+> **"The distinction between the two is fundamental to understanding how the system works. Nix is the package manager. NixOS is the operating system that extends that management to the entire machine configuration."**
+
+KaliVault now includes a premier **NixOS & Nix Interactive Declarative Operating System Studio**:
+- **Nix vs NixOS Architecture Explorer**: Understand the difference between Nix (pure functional package manager running on Linux & macOS) and NixOS (full declarative Linux OS).
+- **The "npm vs Operating System" Analogy Matrix**: Compare how npm manages `package.json -> node_modules/` with how NixOS manages `configuration.nix -> /run/current-system`.
+- **Content-Addressed `/nix/store` Visualizer**: Visual graph showing how multiple versions of libraries (e.g. OpenSSL 1.1 vs OpenSSL 3.0) coexist concurrently with zero diamond dependency collisions.
+- **Rollback Time Machine & Bootloader Simulator**: Experience atomic symlink flipping and sub-second disaster recovery with `sudo nixos-rebuild switch --rollback` and interactive `systemd-boot` / GRUB menu emulation.
+- **Live `configuration.nix` & `flake.nix` Studio**: Real-time module toggles, syntax generation, and dry-run build simulation.
+- **Interactive Nix Terminal Simulator**: Test commands like `nix-shell`, `nixos-rebuild`, and `nix-collect-garbage` directly in browser.
+- **Mastery Quiz & Production Cheat-Sheet**: Comprehensive questions and categorized commands.
+
+Easily switch between **❄️ NixOS Studio** and **🐉 KaliVault Hub** via the navbar switcher or `#nixos` / `#kali` URL hashes.
+
 ---
 
 ## 🌟 Overview

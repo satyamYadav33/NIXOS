@@ -10,17 +10,37 @@ import { KaliSetupGuide } from './components/KaliSetupGuide';
 import { ExportModal } from './components/ExportModal';
 import { ClayKaliSplash } from './components/ClayKaliSplash';
 import { ThemeTransitionWave } from './components/ThemeTransitionWave';
+import { NixosHub } from './nixos/NixosHub';
 import { ShieldAlert, Terminal, ExternalLink, Flame, Laptop } from 'lucide-react';
 
 export function App() {
+  // Dual-Universe State: Default to 'nixos' as requested by the user
+  const [activeUniverse, setActiveUniverse] = useState<'nixos' | 'kali'>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const hash = window.location.hash.toLowerCase();
+        if (hash === '#kali') return 'kali';
+        if (hash === '#nixos') return 'nixos';
+        const param = new URLSearchParams(window.location.search).get('app');
+        if (param === 'kali') return 'kali';
+        if (param === 'nixos') return 'nixos';
+      }
+      const saved = localStorage.getItem('active_universe');
+      if (saved === 'kali' || saved === 'nixos') return saved;
+      return 'nixos';
+    } catch {
+      return 'nixos';
+    }
+  });
+
   const [activeTab, setActiveTab] = useState<'vault' | 'terminal' | 'builder' | 'quiz' | 'releases' | 'setup'>('vault');
   const [searchQuery, setSearchQuery] = useState('');
   const [showOnlyBookmarks, setShowOnlyBookmarks] = useState(false);
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [initialTerminalCommand, setInitialTerminalCommand] = useState<string | undefined>(undefined);
 
-  // Splash Screen state (lazy loading Kali logo intro animation)
-  const [showSplash, setShowSplash] = useState(true);
+  // Splash Screen state (only for Kali mode)
+  const [showSplash, setShowSplash] = useState(false);
 
   // Theme state with local storage persistence
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -51,6 +71,27 @@ export function App() {
       console.error('Failed to save theme:', e);
     }
   }, [theme]);
+
+  // Synchronize URL hash & title with active universe
+  useEffect(() => {
+    try {
+      localStorage.setItem('active_universe', activeUniverse);
+    } catch (e) {
+      console.error('Failed to save active universe:', e);
+    }
+
+    if (activeUniverse === 'nixos') {
+      document.title = 'NixOS Studio — Declarative OS & Rollback Visualizer';
+      if (window.location.hash !== '#nixos') {
+        window.history.replaceState(null, '', '#nixos');
+      }
+    } else {
+      document.title = 'KaliVault — Ultimate Kali Linux Cybersecurity Command Hub';
+      if (window.location.hash !== '#kali') {
+        window.history.replaceState(null, '', '#kali');
+      }
+    }
+  }, [activeUniverse]);
 
   // Load bookmarks from localStorage
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(() => {
@@ -105,10 +146,32 @@ export function App() {
     }, 350);
   };
 
+  // If in NixOS Universe, render the dedicated Nix & NixOS Declarative OS Interactive Visualizer
+  if (activeUniverse === 'nixos') {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 relative overflow-x-hidden">
+        {/* Full-Screen Smooth Theme Wave Morph Animation */}
+        <ThemeTransitionWave
+          isAnimating={isThemeTransitioning}
+          targetTheme={targetTheme}
+          onAnimationEnd={() => setIsThemeTransitioning(false)}
+          originCoords={waveOrigin}
+        />
+
+        <NixosHub
+          onSwitchToKali={() => setActiveUniverse('kali')}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
+        />
+      </div>
+    );
+  }
+
+  // Otherwise render KaliVault Hub
   return (
     <div className="min-h-screen bg-app text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-300 selection:bg-cyan-500/30 selection:text-cyan-600 dark:selection:text-cyan-200 relative overflow-x-hidden">
       
-      {/* 3-Second Kali Dragon Logo Lazy Loading Splash Intro */}
+      {/* Kali Splash Intro */}
       {showSplash && (
         <ClayKaliSplash
           onComplete={() => setShowSplash(false)}
@@ -138,6 +201,7 @@ export function App() {
         theme={theme}
         onToggleTheme={handleToggleTheme}
         onReplaySplash={() => setShowSplash(true)}
+        onSwitchToNixos={() => setActiveUniverse('nixos')}
       />
 
       {/* Main Content Area */}
@@ -163,6 +227,16 @@ export function App() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono self-end sm:self-center">
+            {/* Quick Switch to NixOS */}
+            <button
+              onClick={() => setActiveUniverse('nixos')}
+              className="clay-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-cyan-700 dark:text-cyan-300 font-bold cursor-pointer border border-cyan-500/30"
+              title="Switch to Nix & NixOS Declarative Studio"
+            >
+              <span>❄️</span>
+              <span>NixOS Studio</span>
+            </button>
+
             {/* Quick Link to Setup Guide */}
             <button
               onClick={() => setActiveTab('setup')}
@@ -187,10 +261,6 @@ export function App() {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               {COMMANDS_DATA.length}+ Commands
             </span>
-            <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">|</span>
-            <span className="clay-badge px-3 py-1 text-slate-800 dark:text-slate-200 font-bold">
-              9 Tactical Domains
-            </span>
           </div>
         </div>
 
@@ -198,20 +268,13 @@ export function App() {
         {activeTab === 'vault' && (
           <CommandVault
             commands={COMMANDS_DATA}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
             bookmarkedIds={bookmarkedIds}
             onToggleBookmark={handleToggleBookmark}
             onRunInTerminal={handleRunInTerminal}
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
             showOnlyBookmarks={showOnlyBookmarks}
             setShowOnlyBookmarks={setShowOnlyBookmarks}
-          />
-        )}
-
-        {activeTab === 'setup' && (
-          <KaliSetupGuide
-            onRunInTerminal={handleRunInTerminal}
-            onExploreCommands={() => setActiveTab('vault')}
           />
         )}
 
@@ -223,9 +286,7 @@ export function App() {
         )}
 
         {activeTab === 'builder' && (
-          <CommandBuilder
-            onRunInTerminal={handleRunInTerminal}
-          />
+          <CommandBuilder onRunInTerminal={handleRunInTerminal} />
         )}
 
         {activeTab === 'quiz' && (
@@ -233,8 +294,13 @@ export function App() {
         )}
 
         {activeTab === 'releases' && (
-          <LatestReleases
+          <LatestReleases onRunInTerminal={handleRunInTerminal} />
+        )}
+
+        {activeTab === 'setup' && (
+          <KaliSetupGuide
             onRunInTerminal={handleRunInTerminal}
+            onExploreCommands={() => setActiveTab('vault')}
           />
         )}
 

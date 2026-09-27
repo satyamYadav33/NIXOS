@@ -1,8 +1,8 @@
 {
-  "name": "kalivault",
+  "name": "nixos-studio",
   "private": true,
   "version": "1.0.0",
-  "description": "Interactive Kali Linux Cybersecurity Command Hub & Terminal Simulator",
+  "description": "Nix & NixOS Declarative Architecture Visualizer, Atomic Rollback Studio & KaliVault Hub",
   "type": "module",
   "scripts": {
     "dev": "vite",

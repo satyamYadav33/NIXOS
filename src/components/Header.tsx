@@ -28,6 +28,7 @@ interface HeaderProps {
   theme: 'dark' | 'light';
   onToggleTheme: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onReplaySplash?: () => void;
+  onSwitchToNixos?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -42,7 +43,8 @@ export const Header: React.FC<HeaderProps> = ({
   totalCommandsCount,
   theme,
   onToggleTheme,
-  onReplaySplash
+  onReplaySplash,
+  onSwitchToNixos
 }) => {
   const isDark = theme === 'dark';
 
@@ -146,6 +148,18 @@ export const Header: React.FC<HeaderProps> = ({
               <Download className="w-3.5 h-3.5 text-cyan-500" />
               <span className="hidden sm:inline">Export</span>
             </button>
+
+            {/* Switch to NixOS Studio */}
+            {onSwitchToNixos && (
+              <button
+                onClick={onSwitchToNixos}
+                title="Switch to Nix & NixOS Declarative Studio"
+                className="clay-btn flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 cursor-pointer"
+              >
+                <span>❄️</span>
+                <span className="hidden sm:inline">NixOS Studio</span>
+              </button>
+            )}
 
             {/* Claymorphic Dark / Light Mode Switcher */}
             <button
